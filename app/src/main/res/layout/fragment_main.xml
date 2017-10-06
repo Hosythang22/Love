@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/backgound_frag_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent_20"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="6">
+
+            <LinearLayout
+                android:id="@+id/linLargeCircle"
+                android:layout_width="@dimen/cirle_height"
+                android:layout_height="@dimen/cirle_width"
+                android:background="@drawable/circle_background"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <hs.thang.com.love.util.CustomTextView
+                        android:id="@+id/txtTop"
+                        style="@style/TextLargeCircle"
+                        android:text="@string/start_days" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <hs.thang.com.love.util.CustomTextView
+                        android:id="@+id/txtMedium"
+                        style="@style/TextLargeCircle"
+                        android:text="@string/x_days"
+                        android:textSize="40sp" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <hs.thang.com.love.util.CustomTextView
+                        android:id="@+id/txtBottom"
+                        style="@style/TextLargeCircle"
+                        android:text="@string/each_days" />
+                </FrameLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="11"
+            android:layout_weight="4"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:weightSum="4"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+
+                    <ImageView
+                        android:id="@+id/avata1"
+                        style="@style/ImageAvata" />
+                </FrameLayout>
+
+                <hs.thang.com.love.util.CustomTextView
+                    android:id="@+id/nickname1"
+                    style="@style/TextAvata"
+                    android:text="Nick Name 1" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="@dimen/heart_max_width"
+                    android:layout_height="@dimen/heart_max_height"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+                    <hs.thang.com.love.view.customview.CustomHeart
+                        android:id="@+id/forTest"
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/heart_max_width"
+                        android:layout_height="@dimen/heart_max_height" />
+                </FrameLayout>
+
+                <hs.thang.com.love.util.CustomTextView
+                    android:id="@+id/nickname3"
+                    style="@style/TextAvata"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:weightSum="4"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3">
+                    <ImageView
+                        android:id="@+id/avata2"
+                        style="@style/ImageAvata" />
+                </FrameLayout>
+
+                <hs.thang.com.love.util.CustomTextView
+                    android:id="@+id/nickname2"
+                    style="@style/TextAvata"
+                    android:text="Nick Name 2" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></View>
+</LinearLayout>

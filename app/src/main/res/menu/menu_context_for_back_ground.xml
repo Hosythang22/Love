@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/idChangeData"
+        android:title="@string/change_start_date">
+    </item>
+    <item
+        android:id="@+id/idChangeBackGroud"
+        android:title="@string/change_back_ground">
+    </item>
+</menu>

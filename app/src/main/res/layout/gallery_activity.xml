@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgound"
+    android:layout_height="match_parent"
+    tools:context="hs.thang.com.love.TestActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_alignParentTop="true"
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <include layout="@layout/gallery_main"/>
+
+    <Spinner
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent_20"
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" />
+        android:prompt="@string/all_album"/>
+</RelativeLayout>

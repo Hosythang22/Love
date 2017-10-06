@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/idChangeAvata1"
+        android:title="@string/change_avata">
+    </item>
+    <item
+        android:id="@+id/idChangeNickName1"
+        android:title="@string/change_nick_name">
+    </item>
+</menu>

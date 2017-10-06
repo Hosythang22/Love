@@ -1,0 +1,177 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
+
+    <style name="TextAvata">
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>/>
+        <item name="android:capitalize">characters</item>
+        <item name="android:textIsSelectable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="TextTitle">
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:background">@drawable/ripple_effect</item>
+        <item name="android:gravity">center</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/white</item>/>
+        <item name="android:capitalize">characters</item>
+        <item name="android:textIsSelectable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="TextLargeCircle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/white</item>/>
+        <item name="android:capitalize">characters</item>
+        <item name="android:textIsSelectable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="ImageAvata">
+        <item name="android:padding">1.5dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal|bottom</item>
+        <item name="android:background">@drawable/ripple_avata_circle</item>
+    </style>
+
+    <style name="nickNameDialog">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_weight">5</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rectangle</item>
+    </style>
+
+    <style name="TitleDialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/pink</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CustomHintTextAppearance" parent="TextAppearance.Design.Error">
+        <item name="android:textSize">0dp</item>
+    </style>
+
+    <style name="TextInputLayoutTheme">
+        <item name="android:background">@android:color/transparent</item>
+        <!-- Fix runtime error when use DeviceDefault theme -->
+        <item name="colorPrimary">@color/primary</item>
+        <!-- Fix TextInputLayout bug when use DeviceDefault theme -->
+        <item name="editTextStyle">@style/EditTextSamsungStyle</item>
+    </style>
+
+    <style name="EditTextSamsungStyle" parent="Widget.AppCompat.EditText"></style>
+
+    <style name="NewDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="MyTheme" parent="android:Theme.NoTitleBar.Fullscreen">
+    </style>
+
+    <style name="keyboard_row">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="keyboard_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textSize">31sp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:background">@drawable/keyboard_button_bg</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+
+    <style name="keyboard_number_button" parent="keyboard_button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:tag">number_button</item>
+        <item name="android:textSize">31sp</item>
+    </style>
+
+    <style name="password_view_state">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="password_view">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_marginLeft">7dp</item>
+        <item name="android:layout_marginRight">7dp</item>
+    </style>
+
+    <style name="textview_label">
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/pink_</item>
+    </style>
+
+    <style name="list_item_text_view">
+        <item name="android:textSize">@dimen/list_item_text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="notification_volume_button_light">
+        <item name="android:textSize">@dimen/notification_volume_button_textsize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingRight">@dimen/notification_volume_button_pading</item>
+        <item name="android:paddingLeft">@dimen/notification_volume_button_pading</item>
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+    </style>
+
+</resources>

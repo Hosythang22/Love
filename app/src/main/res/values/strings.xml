@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Love</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_fingerprint">Enter password or use your fingerprint to continue</string>
+    <string name="desc_fingerprint">Please place your fingertip on the scanner to verify your identity</string>
+    <string name="note">(Fingerprint sign in makes your app login much faster. Your device should have at least one fingerprint registered in device settings)</string>
+    <string name="title_activity_home">Fingerprint</string>
+    <string name="activity_home_desc">You have successfully logged in with fingerprint authentication</string>
+    <string name="activity_home_note">Close and re-open the app to see the fingerprint auth screen again</string>
+    <string name="rename">Rename NickName</string>
+    <string name="change_avata">Change Avata</string>
+    <string name="change_nick_name">Change Nick Name</string>
+    <string name="change_start_date">Change Start Date</string>
+    <string name="change_back_ground">Change Back Ground</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="nickName">NICK NAME</string>
+    <string name="days"> Days</string>
+    <string name="x_days">X Days</string>
+    <string name="start_days">Start day</string>
+    <string name="each_days">Each days</string>
+
+    // ViewParger
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="red">RED</string>
+    <string name="blue">BLUE</string>
+    <string name="green">GREEN</string>
+
+    //TabLayout
+    <string name="time">Time</string>
+    <string name="fall_in_love">Fall In Love</string>
+    <string name="setting">Setting</string>
+
+    //Spinner
+    <string name="all_album">All Album</string>
+
+    //key board
+    <string name="number_zero">0</string>
+    <string name="number_one">1</string>
+    <string name="number_two">2</string>
+    <string name="number_three">3</string>
+    <string name="number_four">4</string>
+    <string name="number_five">5</string>
+    <string name="number_six">6</string>
+    <string name="number_seven">7</string>
+    <string name="number_eight">8</string>
+    <string name="number_nine">9</string>
+    <string name="btn_clear">Clear</string>
+    <string name="btn_backspace">Back</string>
+
+    //Setting
+    <string name="more">More</string>
+    <string name="notification">Notification</string>
+    <string name="lock_screen">Lock Screen</string>
+    <string name="security">Security</string>
+    <string name="password">Password</string>
+    <string name="finger_print">Finger Print</string>
+    <string name="interface_setting">Interface Setting</string>
+
+    <string name="share_for_friend">Share for friend</string>
+    <string name="rare_for_app">Rate for App</string>
+    <string name="go_to_app">Go to App</string>
+    <string name="change_wallpaper">Change Wallpaper</string>
+    <string name="change_the_font">Change the font</string>
+    <string name="theme_color">Theme Color</string>
+    <string name="text_color">Text Color</string>
+    <string name="color_upper_text">Color Upper Text</string>
+    <string name="color_lower_text">Color Lower Text</string>
+    <string name="color_day_number">Color Day Number</string>
+    <string name="color_nickname1">Color Nickname 1</string>
+    <string name="color_nickname2">Color Nickname 2</string>
+
+</resources>

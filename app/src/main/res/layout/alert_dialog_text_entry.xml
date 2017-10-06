@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <hs.thang.com.love.util.CustomTextView
+        style="@style/TitleDialog"
+        android:text="@string/rename" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        app:hintTextAppearance="@style/CustomHintTextAppearance">
+
+        <EditText
+            android:id="@+id/username_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink"
+            android:focusable="true"
+            android:imeOptions="flagNoExtractUi"
+            android:inputType="textCapSentences"
+            android:maxLength="80"
+            android:maxLines="1"
+            android:privateImeOptions="inputType=filename"
+            android:scrollHorizontally="true"
+            android:textCursorDrawable="@color/pink" />
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp"
+        android:weightSum="11">
+
+        <hs.thang.com.love.util.CustomTextView
+            android:id="@+id/txtCancelDialog"
+            style="@style/nickNameDialog"
+            android:text="@string/cancel" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"></View>
+
+        <hs.thang.com.love.util.CustomTextView
+            android:id="@+id/txtOkDialog"
+            style="@style/nickNameDialog"
+            android:text="@string/ok" />
+    </LinearLayout>
+
+</LinearLayout>
