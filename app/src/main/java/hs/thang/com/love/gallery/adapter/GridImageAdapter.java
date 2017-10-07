@@ -6,14 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import hs.thang.com.love.gallery.data.MediaItem;
 import hs.thang.com.love.gallery.data.MediaObject;
@@ -65,9 +66,18 @@ public class GridImageAdapter extends GalleryBaseAdapter {
         @Override
         void bind(MediaObject mediaObject) {
             MediaItem mediaItem = (MediaItem) mediaObject;
+
+            RequestOptions options = new RequestOptions()
+                    /*.signature(mediaItem.getSignature())*/
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .centerCrop()
+                    /*.placeholder(placeholder)*/
+                    //.animate(R.anim.fade_in)//TODO:DONT WORK WELL
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
             Glide.with(imageView.getContext())
                     .load(mediaItem.getUri())
-                        /*.apply(options)*/
+                    .apply(options)
                     .thumbnail(0.5f)
                     .into(imageView);
         }

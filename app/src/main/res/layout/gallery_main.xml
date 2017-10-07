@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/swipe_refresh"
-android:layout_below="@+id/my_toolbar"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recycler_grid_view"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:clipToPadding="false"
-    android:scrollbars="vertical"
-    android:scrollbarThumbVertical="@drawable/ic_scrollbar"
-    />
-</android.support.v4.widget.SwipeRefreshLayout>
+    android:layout_below="@+id/my_toolbar">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:clipToPadding="false"
+        android:scrollbarThumbVertical="@drawable/ic_scrollbar"
+        android:scrollbars="vertical" />
+</LinearLayout>

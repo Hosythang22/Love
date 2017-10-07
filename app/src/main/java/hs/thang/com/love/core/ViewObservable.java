@@ -3,10 +3,6 @@ package hs.thang.com.love.core;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by sev_user on 3/13/2017.
- */
-
 public class ViewObservable {
 
     private final LocalObservable mObservable = new LocalObservable();

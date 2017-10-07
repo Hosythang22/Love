@@ -38,7 +38,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class GalleryActivity extends AbsActivity {
 
     private static final String TAG = "GalleryActivity";
-    private static final int NUMBER_OF_COLUMNS = 3;
 
     private RecyclerView mRecyclerView;
     private GalleryBaseAdapter mAdapter;

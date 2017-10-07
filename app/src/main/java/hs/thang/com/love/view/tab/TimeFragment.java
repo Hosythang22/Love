@@ -11,6 +11,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import hs.thang.com.love.common.NewEventDialog;
+import hs.thang.com.love.core.Event;
+import hs.thang.com.love.data.StringData;
 import hs.thang.com.love.gallery.GalleryActivity;
 import hs.thang.com.thu.R;
 
@@ -20,6 +26,7 @@ public class TimeFragment extends AbsFragment {
     private Context mContext;
     private LinearLayout mBackGroundTime;
     private TextView mStartGallery;
+    private TextView mCreateNewEvent;
 
     public TimeFragment(Context context) {
         mContext = context;
@@ -42,14 +49,30 @@ public class TimeFragment extends AbsFragment {
     private void initView(View rootView) {
         mBackGroundTime = (LinearLayout) rootView.findViewById(R.id.backgound_frag_setting);
         mStartGallery = (TextView) rootView.findViewById(R.id.textView3);
+        mCreateNewEvent = (TextView) rootView.findViewById(R.id.textView4);
 
-        mStartGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, GalleryActivity.class);
-                startActivity(intent);
-            }
+        mStartGallery.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, GalleryActivity.class);
+            startActivity(intent);
         });
 
+        mCreateNewEvent.setOnClickListener(v -> {
+            CreateNewEvent(mCreateNewEvent, "fuck");
+        });
+    }
+
+    private void CreateNewEvent(final TextView nickName, final String string) {
+        NewEventDialog newEventDialog = new NewEventDialog(mContext);
+        newEventDialog.showCreateNewEventDialog();
+        newEventDialog.setCurrentName(nickName.getText().toString());
+        newEventDialog.addObserver(new Observer() {
+            @Override
+            public void update(Observable observable, Object data) {
+                Event ev = (Event) data;
+                String newName = ev.getData() + "";
+                StringData.setPreference(mContext, string, newName);
+                nickName.setText(newName);
+            }
+        });
     }
 }

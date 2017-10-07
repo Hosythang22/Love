@@ -5,17 +5,14 @@
     android:id="@+id/backgound_frag_time"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="First View"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:textSize="28sp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView" />
+        android:clipToPadding="false"
+        android:scrollbarThumbVertical="@drawable/ic_scrollbar"
+        android:scrollbars="vertical" />
 
 
     <TextView
@@ -32,5 +29,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="new Evvent"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:minLines="2"
+        android:id="@+id/textView4"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

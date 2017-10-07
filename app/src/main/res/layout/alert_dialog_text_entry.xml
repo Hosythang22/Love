@@ -33,6 +33,23 @@
             android:textCursorDrawable="@color/pink" />
     </android.support.design.widget.TextInputLayout>
 
+    <hs.thang.com.love.util.CustomTextView
+        android:paddingTop="12dp"
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/pink"
+        android:text="Date" />
+
+    <hs.thang.com.love.util.CustomTextView
+        android:paddingTop="12dp"
+        android:id="@+id/pickImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick Image"
+        android:backgroundTint="@color/pink"
+        android:scrollHorizontally="true" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

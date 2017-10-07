@@ -31,6 +31,7 @@
     <color name="turquoise">#ff86b9b5</color>
     <color name="slate">#ff76a9b5</color>
 
+    <color name="black">#000000</color>
     <color name="primary_text_color">#000000</color>
     <color name="colorPrimaryLight">#fafafa</color>
     <color name="secondery_text_color">#cc000000</color>

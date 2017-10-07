@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:padding="1dp">
@@ -8,12 +8,11 @@
     <TextView
         android:id="@+id/texto"
         android:gravity="center_vertical"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:singleLine="true"
-        android:textColor="@color/errorText"
+        android:textColor="@color/white"
         android:textSize="17sp"/>
-
 </RelativeLayout>
