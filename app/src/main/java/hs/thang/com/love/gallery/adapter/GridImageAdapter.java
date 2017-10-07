@@ -25,14 +25,6 @@ public class GridImageAdapter extends GalleryBaseAdapter {
 
     private ArrayList<MediaItem> mMediaItems;
 
-    /*public GridImageAdapter(Context context, ArrayList<MediaObject> mediaObjects) {
-        super(context, mediaObjects);
-    }*/
-    public GridImageAdapter(Context context, ArrayList<MediaItem> mediaItems) {
-        super(context, null);
-        mMediaItems = mediaItems;
-    }
-
     public GridImageAdapter(Context context) {
         super(context, null);
     }
@@ -84,5 +76,12 @@ public class GridImageAdapter extends GalleryBaseAdapter {
     @Override
     public int getItemCount() {
         return (mMediaItems != null) ? mMediaItems.size() : 0;
+    }
+
+    public void clear() {
+        if (mMediaItems != null) {
+            mMediaItems.clear();
+            notifyDataSetChanged();
+        }
     }
 }

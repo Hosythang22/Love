@@ -14,31 +14,18 @@ import hs.thang.com.love.util.StringUtils;
 @SuppressLint("ParcelCreator")
 public class MediaItem extends MediaObject {
 
-    public static final int MEDIA_TYPE_IMAGE = 0;
-    public static final int MEDIA_TYPE_VIDEO = 1;
-
-    public float mRotation;
-
     private String title;
     private String thumbnail;
 
     private String mPath = null;
     private long mDateModified = -1;
     private String mMimeType = "unknown";
-    private int mOrientation = 0;
 
     private String mUriString = null;
-
-    private long mSize = -1;
-    private boolean mSelected = false;
-
-    public MediaItem() {
-
-    }
+    private long mBucketId = 0;
 
     public MediaItem(File file) {
         this(file.getPath());
-        mSize = file.length();
         mMimeType = StringUtils.getMimeType(mPath);
     }
 
@@ -97,7 +84,7 @@ public class MediaItem extends MediaObject {
                 MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.DATE_TAKEN,
                 MediaStore.Images.Media.MIME_TYPE,
-                MediaStore.Images.Media.SIZE,
+                MediaStore.Images.Media.BUCKET_ID,
                 MediaStore.Images.Media.ORIENTATION
         };
     }
@@ -106,7 +93,6 @@ public class MediaItem extends MediaObject {
         mPath = cur.getString(0);
         mDateModified = cur.getLong(1);
         mMimeType = cur.getString(2);
-        mSize = cur.getLong(3);
-        mOrientation = cur.getInt(4);
+        mBucketId = cur.getLong(3);
     }
 }

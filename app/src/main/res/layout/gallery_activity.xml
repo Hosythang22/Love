@@ -19,10 +19,10 @@
     <include layout="@layout/gallery_main"/>
 
     <Spinner
-        android:layout_alignParentBottom="true"
-        android:background="@color/transparent_20"
         android:id="@+id/spinner"
+        android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
-        android:layout_height="48dp" />
-        android:prompt="@string/all_album"/>
+        android:layout_height="wrap_content"
+        android:background="@color/errorText"
+        android:overlapAnchor="false"/>
 </RelativeLayout>

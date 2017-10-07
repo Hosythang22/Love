@@ -42,8 +42,8 @@ public abstract class GalleryBaseAdapter extends RecyclerView.Adapter<RecyclerVi
         return mMediaObjects.size();
     }
 
-    public void clear() {
+    /*public void clear() {
         mMediaObjects.clear();
         notifyDataSetChanged();
-    }
+    }*/
 }

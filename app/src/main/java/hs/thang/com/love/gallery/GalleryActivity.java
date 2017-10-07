@@ -2,13 +2,10 @@ package hs.thang.com.love.gallery;
 
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,54 +13,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
+import hs.thang.com.love.gallery.adapter.AlbumSpinnerAdapter;
 
 import hs.thang.com.love.AbsActivity;
-import hs.thang.com.love.gallery.adapter.AlbumAdapter;
-import hs.thang.com.love.gallery.adapter.DividerItemDecoration;
 import hs.thang.com.love.gallery.adapter.GalleryBaseAdapter;
 import hs.thang.com.love.gallery.adapter.GridImageAdapter;
 import hs.thang.com.love.gallery.adapter.GridSpacingItemDecoration;
 import hs.thang.com.love.gallery.data.MediaItem;
-import hs.thang.com.love.gallery.data.MediaObject;
 import hs.thang.com.love.gallery.data.MediaSet;
-import hs.thang.com.love.gallery.data.SortingMode;
-import hs.thang.com.love.gallery.data.filter.MediaFilter;
 import hs.thang.com.love.gallery.provider.CPHelper;
 import hs.thang.com.love.util.Measure;
 import hs.thang.com.love.util.PermissionUtils;
 import hs.thang.com.thu.R;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 import android.widget.AdapterView.OnItemSelectedListener;
 
-import com.orhanobut.hawk.Hawk;
-
-public class GalleryActivity extends AbsActivity implements OnItemSelectedListener {
+public class GalleryActivity extends AbsActivity {
 
     private static final String TAG = "GalleryActivity";
     private static final int NUMBER_OF_COLUMNS = 3;
@@ -95,10 +67,12 @@ public class GalleryActivity extends AbsActivity implements OnItemSelectedListen
         mRecyclerView.addItemDecoration(mSpacingDecoration);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, spanCount));
         mRecyclerView.setItemAnimator(new LandingAnimator(new OvershootInterpolator(1f)));
+        mAdapter = new GridImageAdapter(GalleryActivity.this);
+        mRecyclerView.setAdapter(mAdapter);
 
         initActionBar();
         initSpinner();
-        display();
+        //display(MediaSet.ALL_MEDIA_ALBUM_ID);
     }
 
     private void initActionBar() {
@@ -120,8 +94,6 @@ public class GalleryActivity extends AbsActivity implements OnItemSelectedListen
 
     private void initSpinner() {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
-
         ArrayList<MediaSet> mediaSets = new ArrayList<>();
 
         CPHelper.getMediasets(this)
@@ -129,30 +101,29 @@ public class GalleryActivity extends AbsActivity implements OnItemSelectedListen
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mediaSet -> {
                     mediaSets.add(mediaSet);
-                    Log.d("fuck1", "accept");
                 }, throwable -> {
-                    Log.wtf("fuck1", "throwable");
-                } , () -> {
-                            Log.d("fuck1", "run");
+                }, () -> {
+                    spinner.setAdapter(new AlbumSpinnerAdapter(this, mediaSets));
                 });
 
-        // Creating adapter for spinner
-        ArrayAdapter<MediaSet> dataAdapter = new AlbumAdapter(this, mediaSets);
+        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                MediaSet mediaSet = (MediaSet) adapterView.getItemAtPosition(position);
+                display(mediaSet.getmBucketId());
+            }
 
-        /*AlbumAdapter albumAdapter = new AlbumAdapter(this, mediaSets);*/
-
-        // Drop down layout style - list view with radio button
-        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //nothing
+            }
+        });
     }
 
-    private void display() {
+    private void display(long bucketId) {
+        ((GridImageAdapter) mAdapter).clear();
         ArrayList<MediaItem> mediaItems = new ArrayList<>();
-        mAdapter = new GridImageAdapter(GalleryActivity.this);
-        mRecyclerView.setAdapter(mAdapter);
-        CPHelper.getMedia(this, new MediaSet(null, MediaSet.ALL_MEDIA_ALBUM_ID), null, null)
+        CPHelper.getMedia(this, bucketId, null, null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mediaItem -> {
@@ -167,20 +138,6 @@ public class GalleryActivity extends AbsActivity implements OnItemSelectedListen
                         });
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        MediaSet mediaSet = (MediaSet) parent.getItemAtPosition(position);
-
-
-        // Showing selected spinner item
-        /*Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();*/
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

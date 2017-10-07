@@ -34,7 +34,5 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/numberOfImage"/>
         </LinearLayout>
-
-
     </RelativeLayout>
 </android.support.v7.widget.CardView>
