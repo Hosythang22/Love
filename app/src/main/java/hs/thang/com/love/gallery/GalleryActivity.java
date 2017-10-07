@@ -67,7 +67,7 @@ public class GalleryActivity extends AbsActivity implements OnItemSelectedListen
 
     private static final String TAG = "GalleryActivity";
     private static final int NUMBER_OF_COLUMNS = 3;
-    private ArrayList<MediaItem> mMediaItems = new ArrayList<>();
+
     private RecyclerView mRecyclerView;
     private GalleryBaseAdapter mAdapter;
     //private ProgressBar progressBar;
@@ -122,85 +122,56 @@ public class GalleryActivity extends AbsActivity implements OnItemSelectedListen
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Automobile");
-        categories.add("Business Services");
-        categories.add("Computers");
-        categories.add("Education");
-        categories.add("Personal");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-        categories.add("Travel");
-
-
-        /*ArrayList<MediaSet> mediaSets = CPHelper.getAllAlbum(this);*/
-
         ArrayList<MediaSet> mediaSets = new ArrayList<>();
 
-        CPHelper.getMedias(this)
+        CPHelper.getMediasets(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<MediaSet>() {
-                    @Override
-                    public void accept(MediaSet mediaSet) throws Exception {
-                        mediaSets.add(mediaSet);
-                        Log.wtf("fuck1", "accept");
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.wtf("fuck1", "throwable");
-
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        Log.wtf("fuck1", "run");
-
-                    }
+                .subscribe(mediaSet -> {
+                    mediaSets.add(mediaSet);
+                    Log.d("fuck1", "accept");
+                }, throwable -> {
+                    Log.wtf("fuck1", "throwable");
+                } , () -> {
+                            Log.d("fuck1", "run");
                 });
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<MediaSet> dataAdapter = new AlbumAdapter(this, mediaSets);
 
         /*AlbumAdapter albumAdapter = new AlbumAdapter(this, mediaSets);*/
 
         // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
     }
 
     private void display() {
+        ArrayList<MediaItem> mediaItems = new ArrayList<>();
+        mAdapter = new GridImageAdapter(GalleryActivity.this);
+        mRecyclerView.setAdapter(mAdapter);
         CPHelper.getMedia(this, new MediaSet(null, MediaSet.ALL_MEDIA_ALBUM_ID), null, null)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(mediaItem -> {
-                            mMediaItems.add(mediaItem);
-                            Log.wtf("fuck", "accept");
+                            mediaItems.add(mediaItem);
+                            Log.d("fuck", "accept");
                         }, throwable -> {
                             Log.wtf("fuck", throwable);
                         },
                         () -> {
-                            Log.wtf("fuck", "run");
-                            mAdapter = new GridImageAdapter(GalleryActivity.this, mMediaItems);
-                            mRecyclerView.setAdapter(mAdapter);
+                            Log.d("fuck", "run");
+                            ((GridImageAdapter) mAdapter).setMediaItems(mediaItems);
                         });
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
+        MediaSet mediaSet = (MediaSet) parent.getItemAtPosition(position);
+
 
         // Showing selected spinner item
         /*Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();*/

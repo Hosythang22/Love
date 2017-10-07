@@ -9,9 +9,6 @@ import hs.thang.com.love.view.tab.MainFragment;
 import hs.thang.com.love.view.tab.SettingFragment;
 import hs.thang.com.love.view.tab.TimeFragment;
 
-/**
- * Created by sev_user on 3/21/2017.
- */
 
 public class CustomPagerAdapter extends FragmentStatePagerAdapter {
 

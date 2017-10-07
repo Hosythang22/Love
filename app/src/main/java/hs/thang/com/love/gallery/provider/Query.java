@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.Arrays;
 
@@ -31,7 +32,9 @@ public class Query {
     }
 
     public Cursor getCursor(ContentResolver cr) {
-        return cr.query(uri, projection, selection, args, hack());
+        Cursor cursor = cr.query(uri, projection, selection, args, hack());
+        Log.i("fuck", "getCursor: cursor = " + cursor.toString());
+        return cursor;
     }
 
     private String hack() {
@@ -109,26 +112,29 @@ public class Query {
         }
 
         public String[] getStringArgs() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                return Arrays.stream(args).map(Object::toString).toArray(String[]::new);
-            }
+            if (args != null && args.length != 0) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    return Arrays.stream(args).map(Object::toString).toArray(String[]::new);
+                }
 
-            String[] list = new String[args.length];
-            for (int i = 0; i < args.length; i++) list[i] = String.valueOf(args[i]);
-            return list;
+                String[] list = new String[args.length];
+                for (int i = 0; i < args.length; i++) list[i] = String.valueOf(args[i]);
+                return list;
+            }
+            return null;
         }
     }
 
     @Override
     public String toString() {
-        return "Query{" +
-                "\nuri=" + uri +
-                "\nprojection=" + Arrays.toString(projection) +
-                "\nselection='" + selection + '\'' +
-                "\nargs=" + Arrays.toString(args) +
-                "\nsortMode='" + sort +'\'' +
-                "\nascending='" + ascending+ '\'' +
-                "\nlimit='" + limit + '\'' +
+        return "{" +
+                "" + uri +
+                "" + Arrays.toString(projection) +
+                "selection='" + selection + '\'' +
+                "" + Arrays.toString(args) +
+                "'" + sort +'\'' +
+                "'" + ascending+ '\'' +
+                "'" + limit + '\'' +
                 '}';
     }
 }

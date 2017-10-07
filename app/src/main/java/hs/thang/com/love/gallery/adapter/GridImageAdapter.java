@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import hs.thang.com.love.gallery.data.MediaItem;
 import hs.thang.com.love.gallery.data.MediaObject;
@@ -29,6 +31,15 @@ public class GridImageAdapter extends GalleryBaseAdapter {
     public GridImageAdapter(Context context, ArrayList<MediaItem> mediaItems) {
         super(context, null);
         mMediaItems = mediaItems;
+    }
+
+    public GridImageAdapter(Context context) {
+        super(context, null);
+    }
+
+    public void setMediaItems(ArrayList<MediaItem> mediaItems) {
+        mMediaItems = mediaItems;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -61,12 +72,6 @@ public class GridImageAdapter extends GalleryBaseAdapter {
 
         @Override
         void bind(MediaObject mediaObject) {
-            /*Picasso.with(mContext).load(((MediaItem) mediaItem).getThumbnail())
-                    .error(R.drawable.ic_action_fingerprint)
-                    .placeholder(R.drawable.avata_circle)
-                    .into(imageView);
-            //Setting text view title
-            textView.setText(Html.fromHtml(((MediaItem) mediaItem).getTitle()));*/
             MediaItem mediaItem = (MediaItem) mediaObject;
             Glide.with(imageView.getContext())
                     .load(mediaItem.getUri())
@@ -78,6 +83,6 @@ public class GridImageAdapter extends GalleryBaseAdapter {
 
     @Override
     public int getItemCount() {
-        return mMediaItems.size();
+        return (mMediaItems != null) ? mMediaItems.size() : 0;
     }
 }

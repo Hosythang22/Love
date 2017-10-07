@@ -2,6 +2,7 @@ package hs.thang.com.love.gallery.provider;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.util.Log;
 
 import hs.thang.com.love.data.CursorHandler;
 import io.reactivex.Observable;
@@ -13,6 +14,7 @@ import io.reactivex.Observable;
 public class QueryUtils {
 
     public static <T> Observable<T> query(Query q, ContentResolver cr, CursorHandler<T> ch) {
+        Log.i("fuck2", "query: q = " + q.toString());
         return Observable.create(subscriber -> {
             Cursor cursor = null;
             try {

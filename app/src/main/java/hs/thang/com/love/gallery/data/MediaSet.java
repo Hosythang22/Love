@@ -2,6 +2,7 @@ package hs.thang.com.love.gallery.data;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Parcel;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -18,35 +19,58 @@ public class MediaSet extends MediaObject {
 
     private long mId = -1;
     public static final long ALL_MEDIA_ALBUM_ID = 8000;
-    private String mName;
-    private String mCoverPath;
-    private File mFile;
+    private String mAlbumName;
+    private int mNumberOfImage;
+    private String mUriCover;
+    private String mPath;
+    private long mBucketId;
 
     public MediaSet(Cursor cur) {
-        Log.wtf("fuck1", "run = "
-                + cur.getLong(0) + ", "
-                + cur.getString(1) + ", "
-                + cur.getInt(2) + ", "
-                + cur.getString(3) + ", "
-                + cur.getLong(4) + ", ");
+        mBucketId = cur.getLong(0);
+        mAlbumName = cur.getString(1);
+        mNumberOfImage = cur.getInt(2);
+        mPath = cur.getString(3);
     }
 
-    public MediaSet() {
+    public long getmBucketId() {
+        return mBucketId;
     }
 
-    public MediaSet(File file) {
-        mFile = file;
+    public void setmBucketId(long mBucketId) {
+        this.mBucketId = mBucketId;
+    }
+
+    public Uri getUri() {
+        return mUriCover != null ? Uri.parse(mUriCover) : Uri.fromFile(new File(mPath));
+    }
+
+    public String getmAlbumName() {
+        return mAlbumName;
+    }
+
+    public void setmAlbumName(String mAlbumName) {
+        this.mAlbumName = mAlbumName;
+    }
+
+    public int getmNumberOfImage() {
+        return mNumberOfImage;
+    }
+
+    public void setmNumberOfImage(int mNumberOfImage) {
+        this.mNumberOfImage = mNumberOfImage;
+    }
+
+    public String getmUriCover() {
+        return mUriCover;
+    }
+
+    public void setmUriCover(String mUriCover) {
+        this.mUriCover = mUriCover;
     }
 
     public MediaSet(String name, long id) {
-        mName = name;
+        mAlbumName = name;
         mId = id;
-    }
-
-    public MediaSet(String name, long id, String coverPath) {
-        mName = name;
-        mId = id;
-        mCoverPath = coverPath;
     }
 
     @Override
@@ -61,7 +85,7 @@ public class MediaSet extends MediaObject {
 
     @Override
     public Object handle(Cursor cu) throws SQLException {
-        return null;
+        return new MediaSet(cu);
     }
 
     public long getId() {
@@ -70,7 +94,7 @@ public class MediaSet extends MediaObject {
 
     public static String[] getProjection() {
         return new String[]{
-                MediaStore.Files.FileColumns.PARENT,
+                MediaStore.Images.Media.BUCKET_ID,
                 MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
                 "count(*)",
                 MediaStore.Images.Media.DATA,
@@ -79,10 +103,10 @@ public class MediaSet extends MediaObject {
     }
 
     public String getName() {
-        return mName;
+        return mAlbumName;
     }
 
     private String getCoverPath() {
-        return mCoverPath;
+        return mUriCover;
     }
 }
