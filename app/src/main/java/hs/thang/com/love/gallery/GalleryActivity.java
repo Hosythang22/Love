@@ -1,7 +1,9 @@
 package hs.thang.com.love.gallery;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -28,6 +30,7 @@ import hs.thang.com.love.gallery.data.MediaSet;
 import hs.thang.com.love.gallery.provider.CPHelper;
 import hs.thang.com.love.util.Measure;
 import hs.thang.com.love.util.PermissionUtils;
+import hs.thang.com.love.view.tab.TimeFragment;
 import hs.thang.com.thu.R;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -35,7 +38,7 @@ import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class GalleryActivity extends AbsActivity {
+public class GalleryActivity extends AbsActivity implements GridImageAdapter.OnItemClickListener {
 
     private static final String TAG = "GalleryActivity";
 
@@ -67,6 +70,7 @@ public class GalleryActivity extends AbsActivity {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, spanCount));
         mRecyclerView.setItemAnimator(new LandingAnimator(new OvershootInterpolator(1f)));
         mAdapter = new GridImageAdapter(GalleryActivity.this);
+        mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
         initActionBar();
@@ -160,5 +164,19 @@ public class GalleryActivity extends AbsActivity {
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    @Override
+    public void onItemClick(MediaItem mediaSet) {
+        Uri uri = mediaSet.getUri();
+        Intent intent = new Intent();
+        intent.setData(uri);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    public void onItemLongClick(MediaItem mediaSet) {
+
     }
 }

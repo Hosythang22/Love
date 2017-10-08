@@ -36,19 +36,40 @@
     <hs.thang.com.love.util.CustomTextView
         android:paddingTop="12dp"
         android:id="@+id/date"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/pink"
         android:text="Date" />
 
-    <hs.thang.com.love.util.CustomTextView
-        android:paddingTop="12dp"
-        android:id="@+id/pickImage"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pick Image"
-        android:backgroundTint="@color/pink"
-        android:scrollHorizontally="true" />
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp">
+
+        <hs.thang.com.love.util.CustomTextView
+            android:id="@+id/pickImage"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Image"
+            android:backgroundTint="@color/pink"
+            android:scrollHorizontally="true" />
+
+        <ImageView
+            android:layout_marginLeft="16dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/coverImage"
+            android:scaleType="centerCrop"
+            android:src="@drawable/avata_circle"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

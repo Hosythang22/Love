@@ -7,11 +7,14 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -22,10 +25,18 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import hs.thang.com.love.core.Event;
 import hs.thang.com.love.core.ViewObservable;
+import hs.thang.com.love.gallery.GalleryActivity;
 import hs.thang.com.love.util.CustomTextView;
+import hs.thang.com.love.view.tab.TimeFragment;
 import hs.thang.com.thu.R;
 
 import static java.util.prefs.Preferences.MAX_NAME_LENGTH;
@@ -48,6 +59,19 @@ public class NewEventDialog extends ViewObservable {
     private TextInputLayout mTextInputLayout = null;
     private AlertDialog mAlertDialog = null;
     private EditText mAlertEditText = null;
+    private CustomTextView mTxtPick;
+    private CustomTextView mTxtDate;
+
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick();
+    }
 
     public NewEventDialog(Context ctx) {
         mCtx = ctx;
@@ -87,6 +111,7 @@ public class NewEventDialog extends ViewObservable {
         private static final String TAG = "MediaNewEventDialogFragment";
 
         private final Context mCtx;
+        private ImageView mThumbnail;
 
         public MediaNewEventDialogFragment(Context ctx) {
             mCtx = ctx;
@@ -101,6 +126,9 @@ public class NewEventDialog extends ViewObservable {
             mAlertEditText = (EditText) alertDialogueView.findViewById(R.id.username_edit);
             mTxtOk = (CustomTextView) alertDialogueView.findViewById(R.id.txtOkDialog);
             mTxtCancel = (CustomTextView) alertDialogueView.findViewById(R.id.txtCancelDialog);
+            mTxtPick = (CustomTextView) alertDialogueView.findViewById(R.id.pickImage);
+            mTxtDate = (CustomTextView) alertDialogueView.findViewById(R.id.date);
+            mThumbnail = (ImageView) alertDialogueView.findViewById(R.id.coverImage);
 
             mAlertEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
                     | InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -134,21 +162,19 @@ public class NewEventDialog extends ViewObservable {
                 }
             });
 
-            mTxtOk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startHandleCreateEvent();
-                    hideSoftInput(mAlertEditText.getWindowToken());
-                    mAlertDialog.dismiss();
-                }
+            mTxtOk.setOnClickListener(v -> {
+                startHandleCreateEvent();
+                hideSoftInput(mAlertEditText.getWindowToken());
+                mAlertDialog.dismiss();
             });
 
-            mTxtCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mAlertDialog.dismiss();
-                    hideSoftInput(mAlertEditText.getWindowToken());
-                }
+            mTxtPick.setOnClickListener( view -> {
+                mOnItemClickListener.onItemClick();
+            });
+
+            mTxtCancel.setOnClickListener(v -> {
+                mAlertDialog.dismiss();
+                hideSoftInput(mAlertEditText.getWindowToken());
             });
 
             TextWatcher textWatcher = new TextWatcher() {
@@ -171,6 +197,22 @@ public class NewEventDialog extends ViewObservable {
             mAlertEditText.setFocusable(true);
 
             return mAlertDialog;
+        }
+
+        public void setThumbnail(Uri uri) {
+            RequestOptions options = new RequestOptions()
+                    /*.signature(mediaItem.getSignature())*/
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .centerCrop()
+                    /*.placeholder(placeholder)*/
+                    //.animate(R.anim.fade_in)//TODO:DONT WORK WELL
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+            Glide.with(mThumbnail.getContext())
+                    .load(uri)
+                    .apply(options)
+                    .thumbnail(0.5f)
+                    .into(mThumbnail);
         }
 
         private void startHandleCreateEvent() {
@@ -200,6 +242,10 @@ public class NewEventDialog extends ViewObservable {
 
     public void setCurrentName(String currentName) {
         mDialogFragment.setCurrentName(currentName);
+    }
+
+    public void setThumbnail(Uri uri) {
+        mDialogFragment.setThumbnail(uri);
     }
 
     public void showCreateNewEventDialog() {

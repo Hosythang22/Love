@@ -80,6 +80,10 @@ public class GridImageAdapter extends GalleryBaseAdapter {
                     .apply(options)
                     .thumbnail(0.5f)
                     .into(imageView);
+
+            itemView.setOnClickListener(v ->{
+                mOnItemClickListener.onItemClick(mediaItem);
+            });
         }
     }
 
