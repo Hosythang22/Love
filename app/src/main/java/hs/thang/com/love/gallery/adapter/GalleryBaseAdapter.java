@@ -12,7 +12,6 @@ import hs.thang.com.love.gallery.data.MediaSet;
 
 public abstract class GalleryBaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    protected ArrayList<MediaObject> mMediaObjects;
     protected final Context mContext;
 
 
@@ -49,15 +48,14 @@ public abstract class GalleryBaseAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
 
-    public GalleryBaseAdapter(Context context, ArrayList<MediaObject> mediaObjects) {
-        mMediaObjects = mediaObjects;
+    public GalleryBaseAdapter(Context context) {
         mContext = context;
     }
 
 
     @Override
     public int getItemCount() {
-        return mMediaObjects.size();
+        return -1;
     }
 
     /*public void clear() {

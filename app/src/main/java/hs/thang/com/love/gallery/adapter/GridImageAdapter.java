@@ -27,7 +27,7 @@ public class GridImageAdapter extends GalleryBaseAdapter {
     private ArrayList<MediaItem> mMediaItems;
 
     public GridImageAdapter(Context context) {
-        super(context, null);
+        super(context);
     }
 
     public void setMediaItems(ArrayList<MediaItem> mediaItems) {

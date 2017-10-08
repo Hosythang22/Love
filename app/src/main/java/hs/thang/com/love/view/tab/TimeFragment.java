@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,9 +23,13 @@ import java.util.Observer;
 
 import hs.thang.com.love.common.NewEventDialog;
 import hs.thang.com.love.core.Event;
+import hs.thang.com.love.data.EventInfor;
 import hs.thang.com.love.data.StringData;
 import hs.thang.com.love.gallery.GalleryActivity;
+import hs.thang.com.love.gallery.adapter.GridImageAdapter;
+import hs.thang.com.love.gallery.adapter.TimeAdapter;
 import hs.thang.com.thu.R;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 import static android.content.ContentValues.TAG;
 
@@ -36,6 +44,9 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
     private TextView mStartGallery;
     private TextView mCreateNewEvent;
     private NewEventDialog mNewEventDialog;
+
+    private RecyclerView mRecyclerView;
+    private TimeAdapter mTimeAdapter;
 
     public TimeFragment(Context context) {
         mContext = context;
@@ -60,6 +71,8 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
         mStartGallery = (TextView) rootView.findViewById(R.id.textView3);
         mCreateNewEvent = (TextView) rootView.findViewById(R.id.textView4);
 
+        initRecycleView(rootView);
+
         mStartGallery.setOnClickListener(v -> {
             /*Intent intent = new Intent(mContext, GalleryActivity.class);
             startActivity(intent);*/
@@ -73,6 +86,15 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
         });
     }
 
+    private void initRecycleView(View rootView) {
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_grid_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setItemAnimator(new LandingAnimator(new OvershootInterpolator(1f)));
+        mTimeAdapter = new TimeAdapter(mContext);
+        mRecyclerView.setAdapter(mTimeAdapter);
+    }
+
     private void CreateNewEvent(final TextView nickName, final String string) {
         mNewEventDialog = new NewEventDialog(mContext);
         mNewEventDialog.showCreateNewEventDialog();
@@ -81,9 +103,8 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
 
         mNewEventDialog.addObserver((observable, data) -> {
             Event ev = (Event) data;
-            String newName = ev.getData() + "";
-            StringData.setPreference(mContext, string, newName);
-            nickName.setText(newName);
+            EventInfor eventInfor = (EventInfor) ev.getData();
+            mTimeAdapter.setEventInforItem(eventInfor);
         });
     }
 

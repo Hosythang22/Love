@@ -7,14 +7,12 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -34,9 +32,8 @@ import com.bumptech.glide.request.RequestOptions;
 
 import hs.thang.com.love.core.Event;
 import hs.thang.com.love.core.ViewObservable;
-import hs.thang.com.love.gallery.GalleryActivity;
+import hs.thang.com.love.data.EventInfor;
 import hs.thang.com.love.util.CustomTextView;
-import hs.thang.com.love.view.tab.TimeFragment;
 import hs.thang.com.thu.R;
 
 import static java.util.prefs.Preferences.MAX_NAME_LENGTH;
@@ -51,17 +48,10 @@ public class NewEventDialog extends ViewObservable {
     private final InputMethodManager mInputMethodManager;
     private final MediaNewEventDialogFragment mDialogFragment;
     private final Context mCtx;
-    private String mString = "";
     private Handler mHandler = null;
-    private CustomTextView mTxtOk;
-    private CustomTextView mTxtCancel;
     private static final int HIDE_SOFT_INPUT = 0;
     private TextInputLayout mTextInputLayout = null;
     private AlertDialog mAlertDialog = null;
-    private EditText mAlertEditText = null;
-    private CustomTextView mTxtPick;
-    private CustomTextView mTxtDate;
-
 
     private OnItemClickListener mOnItemClickListener;
 
@@ -110,8 +100,15 @@ public class NewEventDialog extends ViewObservable {
 
         private static final String TAG = "MediaNewEventDialogFragment";
 
+        private CustomTextView mTxtOk;
+        private CustomTextView mTxtCancel;
         private final Context mCtx;
         private ImageView mThumbnail;
+        private String mString = "";
+        private CustomTextView mTxtPick;
+        private CustomTextView mTxtDate;
+        private EditText mAlertEditText = null;
+        private Uri mUri;
 
         public MediaNewEventDialogFragment(Context ctx) {
             mCtx = ctx;
@@ -200,6 +197,7 @@ public class NewEventDialog extends ViewObservable {
         }
 
         public void setThumbnail(Uri uri) {
+            mUri = uri;
             RequestOptions options = new RequestOptions()
                     /*.signature(mediaItem.getSignature())*/
                     .format(DecodeFormat.PREFER_ARGB_8888)
@@ -217,7 +215,8 @@ public class NewEventDialog extends ViewObservable {
 
         private void startHandleCreateEvent() {
             mString = mAlertEditText.getText().toString().trim();
-            notifyObservers(Event.Builder.create().setType(Event.EVENT_RENAME_MEDIA).setData(mString));
+            EventInfor eventInfor = new EventInfor(mString, "datexx", mUri);
+            notifyObservers(Event.Builder.create().setType(Event.EVENT_RENAME_MEDIA).setData(eventInfor));
         }
 
         public void setCurrentName(String currentName) {
