@@ -16,10 +16,14 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
+        android:fitsSystemWindows="true"
+        android:windowSoftInputMode="adjustResize|stateVisible|stateAlwaysHidden"
         android:theme="@style/AppTheme">
 
         <activity
             android:name="hs.thang.com.love.MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:fitsSystemWindows="true"
             android:screenOrientation="portrait">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,6 @@
 package hs.thang.com.love;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +10,16 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +27,7 @@ import android.widget.TextView;
 import hs.thang.com.love.adapter.CustomPagerAdapter;
 import hs.thang.com.love.chat.ChatBottomSheetDialogFragment;
 import hs.thang.com.love.chat.ui.activities.ChatActivity;
+import hs.thang.com.love.chat.ui.fragments.ChatFragment;
 import hs.thang.com.love.chat.ui.view.ChatBottomSheetView;
 import hs.thang.com.love.chat.utils.Constants;
 import hs.thang.com.love.util.Color;
@@ -34,9 +41,6 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
     private ViewPager mViewPager;
     private CustomTablayout mTabLayout;
     public LinearLayout mLinearLayout;
-    private View mBottomSheet;
-    private BottomSheetBehavior mBottomSheetBehavior;
-    private ChatBottomSheetView mChatBottomSheetView;
 
     // for test
     private TextView mTest;
@@ -55,8 +59,7 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         context.startActivity(intent);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +72,7 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         getWindow().setStatusBarColor(ContextCompat.getColor(getBaseContext(), R.color.transparent_20));
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        CustomPagerAdapter adapter = new CustomPagerAdapter(this, getSupportFragmentManager() , mTabLayout.getTabCount());
+        CustomPagerAdapter adapter = new CustomPagerAdapter(this, getSupportFragmentManager(), mTabLayout.getTabCount());
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mViewPager.setAdapter(adapter);
         mTabLayout.setBackgroundColor(Color.TRANSPARENT_40);
@@ -137,14 +140,38 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         });
         mTabLayout.getTabAt(1).select();
 
-        mChatBottomSheetView = (ChatBottomSheetView) findViewById(R.id.chat_bottom_view);
+        /*final ChatBottomSheetDialogFragment myBottomSheet = ChatBottomSheetDialogFragment.newInstance(
+                getIntent().getExtras().getString(Constants.ARG_RECEIVER),
+                getIntent().getExtras().getString(Constants.ARG_RECEIVER_UID),
+                getIntent().getExtras().getString(Constants.ARG_FIREBASE_TOKEN));
+        myBottomSheet.show(getSupportFragmentManager(), myBottomSheet.getTag());*/
 
-        mBottomSheet = findViewById( R.id.bottom_sheet);
-        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
-        mBottomSheetBehavior.setPeekHeight(50);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        // get the bottom sheet view
+        LinearLayout llBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
+
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        /*bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);*/
+
+        //bottomSheetBehavior.setPeekHeight(140);
+
+        bottomSheetBehavior.setHideable(false);
+
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
     }
-
 
     @Override
     protected void onResume() {

@@ -50,13 +50,11 @@ public class NewEventDialog extends ViewObservable {
     public static final int PICK_DATE = 2;
     public static final int PICK_CINTENT = 3;
 
-
     private final InputMethodManager mInputMethodManager;
     private final MediaNewEventDialogFragment mDialogFragment;
     private final Context mCtx;
     private Handler mHandler = null;
     private static final int HIDE_SOFT_INPUT = 0;
-    private TextInputLayout mTextInputLayout = null;
     private AlertDialog mAlertDialog = null;
 
     private OnItemClickListener mOnItemClickListener;
@@ -126,7 +124,6 @@ public class NewEventDialog extends ViewObservable {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             View alertDialogueView = LayoutInflater.from(mCtx).inflate(R.layout.alert_dialog_text_entry, (ViewGroup) null);
-            mTextInputLayout = (TextInputLayout) alertDialogueView.findViewById(R.id.text_input_layout);
             mAlertEditText = (EditText) alertDialogueView.findViewById(R.id.username_edit);
             mTxtOk = (TextViewC) alertDialogueView.findViewById(R.id.txtOkDialog);
             mTxtCancel = (TextViewC) alertDialogueView.findViewById(R.id.txtCancelDialog);
