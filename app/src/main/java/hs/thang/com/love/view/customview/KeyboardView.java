@@ -11,9 +11,9 @@ import hs.thang.com.thu.R;
 
 public class KeyboardView extends FrameLayout implements View.OnClickListener {
 
-    private KeyBoardOnClickListenner mListenner;
+    private OnClickListenner mListenner;
 
-    public void setListenner(KeyBoardOnClickListenner listenner) {
+    public void setListenner(OnClickListenner listenner) {
         mListenner = listenner;
     }
 
@@ -75,7 +75,7 @@ public class KeyboardView extends FrameLayout implements View.OnClickListener {
         }
     }
 
-    public interface KeyBoardOnClickListenner {
+    public interface OnClickListenner {
 
         String onClickNumber(String text);
 

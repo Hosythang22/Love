@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,20 +17,20 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.ArrayList;
 
+import hs.thang.com.love.chat.ui.activities.SplashActivity;
 import hs.thang.com.love.common.NewEventDialog;
 import hs.thang.com.love.core.Event;
 import hs.thang.com.love.data.EventInfor;
-import hs.thang.com.love.data.StringData;
 import hs.thang.com.love.gallery.GalleryActivity;
-import hs.thang.com.love.gallery.adapter.GridImageAdapter;
+import hs.thang.com.love.gallery.adapter.DividerItemDecoration;
 import hs.thang.com.love.gallery.adapter.TimeAdapter;
+import hs.thang.com.love.provider.ProviderUtil;
 import hs.thang.com.thu.R;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
-
-import static android.content.ContentValues.TAG;
 
 @SuppressLint("ValidFragment")
 public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemClickListener {
@@ -41,8 +40,8 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
 
     private Context mContext;
     private LinearLayout mBackGroundTime;
-    private TextView mStartGallery;
     private TextView mCreateNewEvent;
+    private TextView mStartChatActivity;
     private NewEventDialog mNewEventDialog;
 
     private RecyclerView mRecyclerView;
@@ -54,13 +53,14 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView: ");
         View rootView = inflater.inflate(R.layout.fragment_time, container, false);
         initView(rootView);
         return rootView;
@@ -68,28 +68,46 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
 
     private void initView(View rootView) {
         mBackGroundTime = (LinearLayout) rootView.findViewById(R.id.backgound_frag_setting);
-        mStartGallery = (TextView) rootView.findViewById(R.id.textView3);
         mCreateNewEvent = (TextView) rootView.findViewById(R.id.textView4);
+        mStartChatActivity = (TextView) rootView.findViewById(R.id.textView3);
 
         initRecycleView(rootView);
-
-        mStartGallery.setOnClickListener(v -> {
-            /*Intent intent = new Intent(mContext, GalleryActivity.class);
-            startActivity(intent);*/
-
-            Intent pickImageIntent = new Intent(mContext, GalleryActivity.class);
-            startActivityForResult(pickImageIntent, TimeFragment.REQUEST_PICK_IMAGE);
-        });
 
         mCreateNewEvent.setOnClickListener(v -> {
             CreateNewEvent(mCreateNewEvent, "fuck");
         });
+
+        mStartChatActivity.setOnClickListener(v -> {
+            startChatActivity();
+        });
+
+        initData();
+    }
+
+    private void startChatActivity() {
+        Intent intent = new Intent(mContext, SplashActivity.class);
+        startActivity(intent);
+    }
+
+    private void initData() {
+        ArrayList<EventInfor> eventInfors = new ArrayList<>();
+        ProviderUtil.getEventInfor(mContext)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(eventInfor -> {
+                    eventInfors.add(eventInfor);
+                }, throwable -> {
+                    Log.i(TAG, "initData: throwable = " + throwable);
+                }, () -> {
+                    mTimeAdapter.setEventInforItems(eventInfors);
+                });
     }
 
     private void initRecycleView(View rootView) {
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_grid_view);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(mContext, LinearLayoutManager.VERTICAL));
         mRecyclerView.setItemAnimator(new LandingAnimator(new OvershootInterpolator(1f)));
         mTimeAdapter = new TimeAdapter(mContext);
         mRecyclerView.setAdapter(mTimeAdapter);
@@ -104,6 +122,7 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
         mNewEventDialog.addObserver((observable, data) -> {
             Event ev = (Event) data;
             EventInfor eventInfor = (EventInfor) ev.getData();
+            ProviderUtil.insertEvents(mContext, eventInfor);
             mTimeAdapter.setEventInforItem(eventInfor);
         });
     }
@@ -125,8 +144,18 @@ public class TimeFragment extends AbsFragment implements NewEventDialog.OnItemCl
     }
 
     @Override
-    public void onItemClick() {
-        Intent pickImageIntent = new Intent(mContext, GalleryActivity.class);
-        startActivityForResult(pickImageIntent, TimeFragment.REQUEST_PICK_IMAGE);
+    public void onItemClick(int id) {
+        switch (id) {
+            case NewEventDialog.PICK_IMAGE:
+                Intent pickImageIntent = new Intent(mContext, GalleryActivity.class);
+                startActivityForResult(pickImageIntent, TimeFragment.REQUEST_PICK_IMAGE);
+                break;
+            /*case NewEventDialog.PICK_DATE:
+                Intent pickImageIntent = new Intent(mContext, GalleryActivity.class);
+                startActivityForResult(pickImageIntent, TimeFragment.REQUEST_PICK_IMAGE);
+                break;*/
+
+        }
+
     }
 }

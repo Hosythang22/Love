@@ -1,18 +1,9 @@
 package hs.thang.com.love.gallery.provider;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.provider.MediaStore.Images;
-
-import hs.thang.com.love.gallery.data.filter.ImageFileFilter;
 import io.reactivex.Observable;
-
-import com.orhanobut.hawk.Hawk;
-
-import java.io.File;
 
 import hs.thang.com.love.gallery.data.MediaItem;
 import hs.thang.com.love.gallery.data.MediaSet;

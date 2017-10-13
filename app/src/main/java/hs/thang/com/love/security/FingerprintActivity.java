@@ -39,7 +39,7 @@ import hs.thang.com.love.view.customview.KeyboardView;
 import hs.thang.com.love.view.customview.password.PasswordView;
 import hs.thang.com.thu.R;
 
-public class FingerprintActivity extends AbsActivity implements KeyboardView.KeyBoardOnClickListenner {
+public class FingerprintActivity extends AbsActivity implements KeyboardView.OnClickListenner {
 
     private static final String TAG = "FingerprintActivity";
 
@@ -210,7 +210,7 @@ public class FingerprintActivity extends AbsActivity implements KeyboardView.Key
         mPassword.mPasswordView.setStatePasswordView(true, mPassword.mPasswordCount);
 
         if (mPassword.mPasswordCount == 4) {
-            if (mPassword.mPasswordBuilder.toString().equals("2508")) {
+            if (mPassword.mPasswordBuilder.toString().equals("2410")) {
                 finish();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

@@ -1,6 +1,8 @@
 package hs.thang.com.love;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -8,13 +10,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import hs.thang.com.love.adapter.CustomPagerAdapter;
+import hs.thang.com.love.chat.ChatBottomSheetDialogFragment;
+import hs.thang.com.love.chat.ui.activities.ChatActivity;
+import hs.thang.com.love.chat.ui.view.ChatBottomSheetView;
+import hs.thang.com.love.chat.utils.Constants;
 import hs.thang.com.love.util.Color;
 import hs.thang.com.love.util.LoveUtil;
 import hs.thang.com.love.view.tab.CustomTablayout;
@@ -26,12 +34,26 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
     private ViewPager mViewPager;
     private CustomTablayout mTabLayout;
     public LinearLayout mLinearLayout;
+    private View mBottomSheet;
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private ChatBottomSheetView mChatBottomSheetView;
 
     // for test
     private TextView mTest;
     private static final String TAG = "MainActivity";
 
     int[] pagerColors = {R.color.transparent_40, R.color.transparent_20, R.color.transparent_40};
+
+    public static void startActivity(Context context,
+                                     String receiver,
+                                     String receiverUid,
+                                     String firebaseToken) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(Constants.ARG_RECEIVER, receiver);
+        intent.putExtra(Constants.ARG_RECEIVER_UID, receiverUid);
+        intent.putExtra(Constants.ARG_FIREBASE_TOKEN, firebaseToken);
+        context.startActivity(intent);
+    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -114,6 +136,13 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
             }
         });
         mTabLayout.getTabAt(1).select();
+
+        mChatBottomSheetView = (ChatBottomSheetView) findViewById(R.id.chat_bottom_view);
+
+        mBottomSheet = findViewById( R.id.bottom_sheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet);
+        mBottomSheetBehavior.setPeekHeight(50);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
     }
 
 

@@ -25,7 +25,7 @@ import android.widget.EditText;
 
 import hs.thang.com.love.core.Event;
 import hs.thang.com.love.core.ViewObservable;
-import hs.thang.com.love.util.CustomTextView;
+import hs.thang.com.love.util.TextViewC;
 import hs.thang.com.thu.R;
 
 import static java.util.prefs.Preferences.MAX_NAME_LENGTH;
@@ -39,8 +39,8 @@ public class RenameDialog extends ViewObservable {
     private final Context mCtx;
     private String mString = "";
     private Handler mHandler = null;
-    private CustomTextView mTxtOk;
-    private CustomTextView mTxtCancel;
+    private TextViewC mTxtOk;
+    private TextViewC mTxtCancel;
     private static final int HIDE_SOFT_INPUT = 0;
     private TextInputLayout mTextInputLayout = null;
     private AlertDialog mAlertDialog = null;
@@ -96,8 +96,8 @@ public class RenameDialog extends ViewObservable {
             View alertDialogueView = LayoutInflater.from(mCtx).inflate(R.layout.alert_dialog_text_entry, (ViewGroup) null);
             mTextInputLayout = (TextInputLayout) alertDialogueView.findViewById(R.id.text_input_layout);
             mAlertEditText = (EditText) alertDialogueView.findViewById(R.id.username_edit);
-            mTxtOk = (CustomTextView) alertDialogueView.findViewById(R.id.txtOkDialog);
-            mTxtCancel = (CustomTextView) alertDialogueView.findViewById(R.id.txtCancelDialog);
+            mTxtOk = (TextViewC) alertDialogueView.findViewById(R.id.txtOkDialog);
+            mTxtCancel = (TextViewC) alertDialogueView.findViewById(R.id.txtCancelDialog);
 
             mAlertEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
                     | InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);

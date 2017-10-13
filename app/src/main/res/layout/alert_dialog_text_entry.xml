@@ -7,9 +7,9 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <hs.thang.com.love.util.CustomTextView
+    <hs.thang.com.love.util.TextViewC
         style="@style/TitleDialog"
-        android:text="@string/rename" />
+        android:text="@string/new_event" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout"
@@ -33,29 +33,29 @@
             android:textCursorDrawable="@color/pink" />
     </android.support.design.widget.TextInputLayout>
 
-    <hs.thang.com.love.util.CustomTextView
+    <hs.thang.com.love.util.TextViewC
         android:paddingTop="12dp"
         android:id="@+id/date"
         android:textColor="@color/white"
         android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ripple_effect"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/pink"
         android:text="Date" />
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="16dp">
+        android:paddingRight="16dp">
 
-        <hs.thang.com.love.util.CustomTextView
+        <hs.thang.com.love.util.TextViewC
             android:id="@+id/pickImage"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ripple_effect"
             android:layout_height="wrap_content"
             android:text="Pick Image"
             android:backgroundTint="@color/pink"
@@ -63,13 +63,13 @@
 
         <ImageView
             android:layout_marginLeft="16dp"
+            android:layout_alignParentRight="true"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:id="@+id/coverImage"
-            android:scaleType="centerCrop"
-            android:src="@drawable/avata_circle"/>
+            android:scaleType="centerCrop" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
         android:paddingBottom="16dp"
         android:weightSum="11">
 
-        <hs.thang.com.love.util.CustomTextView
+        <hs.thang.com.love.util.TextViewC
             android:id="@+id/txtCancelDialog"
             style="@style/nickNameDialog"
             android:text="@string/cancel" />
@@ -91,7 +91,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"></View>
 
-        <hs.thang.com.love.util.CustomTextView
+        <hs.thang.com.love.util.TextViewC
             android:id="@+id/txtOkDialog"
             style="@style/nickNameDialog"
             android:text="@string/ok" />

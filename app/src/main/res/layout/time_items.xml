@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/backgound"
+    android:background="@color/red"
     android:layout_width="match_parent"
-    android:layout_height="320dp">
+    android:layout_height="180dp">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/thumbnail"/>
 
-    <TextView
+    <hs.thang.com.love.util.TextViewC
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
         android:id="@+id/event_infor"
+        android:layout_centerHorizontal="true"
+        android:textSize="22dp"
         android:text="Event information"/>
 
-    <TextView
+    <hs.thang.com.love.util.TextViewC
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/event_infor"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/white"
+        android:textSize="22dp"
         android:id="@+id/date"
         android:text="date"/>
 
-    <TextView
+    <hs.thang.com.love.util.TextViewC
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/date"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        android:textSize="22dp"
         android:id="@+id/how_long"
         android:text="How long"/>
-
-
-
 </RelativeLayout>

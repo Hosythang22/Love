@@ -30,14 +30,13 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
-import hs.thang.com.love.TestActivity;
 import hs.thang.com.love.common.CountUpTimer;
 import hs.thang.com.love.common.RenameDialog;
 import hs.thang.com.love.core.Event;
 import hs.thang.com.love.data.StringData;
 import hs.thang.com.love.util.LoveUtil;
 import hs.thang.com.love.view.customview.CustomHeart;
-import hs.thang.com.love.util.CustomTextView;
+import hs.thang.com.love.util.TextViewC;
 import hs.thang.com.love.view.DatePickerFragment;
 import hs.thang.com.thu.R;
 
@@ -47,11 +46,11 @@ public class MainFragment extends AbsFragment {
     private ImageView mAvata1;
     private ImageView mAvata2;
     private LinearLayout mLargeImage;
-    private CustomTextView mTxtNickName1;
-    private CustomTextView mTxtNickName2;
-    private CustomTextView mTxtStartDate;
-    private CustomTextView mTxtDaysCount;
-    private CustomTextView mTxtEachDay;
+    private TextViewC mTxtNickName1;
+    private TextViewC mTxtNickName2;
+    private TextViewC mTxtStartDate;
+    private TextViewC mTxtDaysCount;
+    private TextViewC mTxtEachDay;
     private Context mContext;
     private CountUpTimer mCountUpTimer;
     private String mStartTime;
@@ -130,11 +129,11 @@ public class MainFragment extends AbsFragment {
         mAvata1 = (ImageView) rootView.findViewById(R.id.avata1);
         mAvata2 = (ImageView) rootView.findViewById(R.id.avata2);
         mLargeImage = (LinearLayout) rootView.findViewById(R.id.linLargeCircle);
-        mTxtNickName1 = (CustomTextView) rootView.findViewById(R.id.nickname1);
-        mTxtNickName2 = (CustomTextView) rootView.findViewById(R.id.nickname2);
-        mTxtStartDate = (CustomTextView) rootView.findViewById(R.id.txtTop);
-        mTxtDaysCount = (CustomTextView) rootView.findViewById(R.id.txtMedium);
-        mTxtEachDay = (CustomTextView) rootView.findViewById(R.id.txtBottom);
+        mTxtNickName1 = (TextViewC) rootView.findViewById(R.id.nickname1);
+        mTxtNickName2 = (TextViewC) rootView.findViewById(R.id.nickname2);
+        mTxtStartDate = (TextViewC) rootView.findViewById(R.id.txtTop);
+        mTxtDaysCount = (TextViewC) rootView.findViewById(R.id.txtMedium);
+        mTxtEachDay = (TextViewC) rootView.findViewById(R.id.txtBottom);
         mBackgroudMain = (LinearLayout) rootView.findViewById(R.id.backgound_frag_main);
 
         mTest = (CustomHeart) rootView.findViewById(R.id.forTest);
@@ -218,8 +217,7 @@ public class MainFragment extends AbsFragment {
                     getActivity().openContextMenu(mLargeImage);
                     break;
                 case R.id.forTest:
-                    Intent intent = new Intent(mContext, TestActivity.class);
-                    startActivity(intent);
+
                     break;
                 default:
                     break;

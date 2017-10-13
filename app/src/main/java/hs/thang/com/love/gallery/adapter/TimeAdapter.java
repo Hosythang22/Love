@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import hs.thang.com.love.data.EventInfor;
 import hs.thang.com.love.gallery.data.MediaObject;
+import hs.thang.com.love.util.TextViewC;
 import hs.thang.com.thu.R;
 
 /**
@@ -65,21 +66,21 @@ public class TimeAdapter extends GalleryBaseAdapter {
     class TimeViewHolder extends AbsViewHolder {
 
         protected final ImageView imageView;
-        protected final TextView textInfor;
-        protected final TextView date;
-        protected final TextView howLong;
+        protected final TextViewC textInfor;
+        protected final TextViewC date;
+        protected final TextViewC howLong;
 
         public TimeViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.thumbnail);
-            textInfor = (TextView) itemView.findViewById(R.id.event_infor);
-            date = (TextView) itemView.findViewById(R.id.date);
-            howLong = (TextView) itemView.findViewById(R.id.how_long);
+            textInfor = (TextViewC) itemView.findViewById(R.id.event_infor);
+            date = (TextViewC) itemView.findViewById(R.id.date);
+            howLong = (TextViewC) itemView.findViewById(R.id.how_long);
         }
 
         void bind(EventInfor eventInfor) {
 
-            textInfor.setText(eventInfor.getmTextInformation());
+            textInfor.setText(eventInfor.getmContent());
             date.setText(eventInfor.getmDate());
             howLong.setText("how long");
 

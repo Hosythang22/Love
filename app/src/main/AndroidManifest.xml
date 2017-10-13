@@ -7,15 +7,19 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="hs.thang.com.love.MainActivity"
+        <activity
+            android:name="hs.thang.com.love.MainActivity"
             android:screenOrientation="portrait">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,20 +27,61 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
-        <activity android:name="hs.thang.com.love.security.FingerprintActivity"
+        <activity
+            android:name="hs.thang.com.love.security.FingerprintActivity"
             android:screenOrientation="portrait">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name="hs.thang.com.love.gallery.GalleryActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <provider
+            android:name="hs.thang.com.love.provider.EventsCareProvider"
+            android:authorities="hs.thang.com.love" />
+
+
+        <activity
+            android:name="hs.thang.com.love.chat.ui.activities.SplashActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="hs.thang.com.love.TestActivity"
-            android:screenOrientation="portrait">
+
+
+        <activity
+            android:name="hs.thang.com.love.chat.ui.activities.LoginActivity"
+            android:label="@string/app_name">
+
         </activity>
-        <activity android:name="hs.thang.com.love.gallery.GalleryActivity"
-            android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name="hs.thang.com.love.chat.ui.activities.RegisterActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="hs.thang.com.love.chat.ui.activities.UserListingActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="hs.thang.com.love.chat.ui.activities.ChatActivity"
+            android:label="@string/app_name" />
+
+        <service android:name="hs.thang.com.love.chat.fcm.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="hs.thang.com.love.chat.fcm.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

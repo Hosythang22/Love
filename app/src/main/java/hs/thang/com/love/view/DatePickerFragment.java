@@ -1,5 +1,6 @@
 package hs.thang.com.love.view;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
+
+import hs.thang.com.thu.R;
 
 /**
  * Created by sev_user on 3/17/2017.
@@ -25,7 +28,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        return new DatePickerDialog(getActivity(), R.style.datepicker, this, year, month, day);
     }
 
     @Override

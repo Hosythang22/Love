@@ -16,12 +16,12 @@ import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -33,7 +33,8 @@ import com.bumptech.glide.request.RequestOptions;
 import hs.thang.com.love.core.Event;
 import hs.thang.com.love.core.ViewObservable;
 import hs.thang.com.love.data.EventInfor;
-import hs.thang.com.love.util.CustomTextView;
+import hs.thang.com.love.util.TextViewC;
+import hs.thang.com.love.view.DatePickerFragment;
 import hs.thang.com.thu.R;
 
 import static java.util.prefs.Preferences.MAX_NAME_LENGTH;
@@ -44,6 +45,11 @@ import static java.util.prefs.Preferences.MAX_NAME_LENGTH;
 
 public class NewEventDialog extends ViewObservable {
     private static final String TAG = "NewEventDialog";
+
+    public static final int PICK_IMAGE = 1;
+    public static final int PICK_DATE = 2;
+    public static final int PICK_CINTENT = 3;
+
 
     private final InputMethodManager mInputMethodManager;
     private final MediaNewEventDialogFragment mDialogFragment;
@@ -60,7 +66,7 @@ public class NewEventDialog extends ViewObservable {
     }
 
     public interface OnItemClickListener{
-        void onItemClick();
+        void onItemClick(int id);
     }
 
     public NewEventDialog(Context ctx) {
@@ -100,13 +106,14 @@ public class NewEventDialog extends ViewObservable {
 
         private static final String TAG = "MediaNewEventDialogFragment";
 
-        private CustomTextView mTxtOk;
-        private CustomTextView mTxtCancel;
+        private TextViewC mTxtOk;
+        private TextViewC mTxtCancel;
         private final Context mCtx;
         private ImageView mThumbnail;
-        private String mString = "";
-        private CustomTextView mTxtPick;
-        private CustomTextView mTxtDate;
+        private String mContent = "";
+        private String mDate = "";
+        private TextViewC mTxtPick;
+        private TextViewC mTxtDate;
         private EditText mAlertEditText = null;
         private Uri mUri;
 
@@ -121,10 +128,10 @@ public class NewEventDialog extends ViewObservable {
             View alertDialogueView = LayoutInflater.from(mCtx).inflate(R.layout.alert_dialog_text_entry, (ViewGroup) null);
             mTextInputLayout = (TextInputLayout) alertDialogueView.findViewById(R.id.text_input_layout);
             mAlertEditText = (EditText) alertDialogueView.findViewById(R.id.username_edit);
-            mTxtOk = (CustomTextView) alertDialogueView.findViewById(R.id.txtOkDialog);
-            mTxtCancel = (CustomTextView) alertDialogueView.findViewById(R.id.txtCancelDialog);
-            mTxtPick = (CustomTextView) alertDialogueView.findViewById(R.id.pickImage);
-            mTxtDate = (CustomTextView) alertDialogueView.findViewById(R.id.date);
+            mTxtOk = (TextViewC) alertDialogueView.findViewById(R.id.txtOkDialog);
+            mTxtCancel = (TextViewC) alertDialogueView.findViewById(R.id.txtCancelDialog);
+            mTxtPick = (TextViewC) alertDialogueView.findViewById(R.id.pickImage);
+            mTxtDate = (TextViewC) alertDialogueView.findViewById(R.id.date);
             mThumbnail = (ImageView) alertDialogueView.findViewById(R.id.coverImage);
 
             mAlertEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
@@ -145,19 +152,14 @@ public class NewEventDialog extends ViewObservable {
                     .setView(alertDialogueView).create();
             mAlertDialog.show();
 
-            if (mString != null) {
-                mAlertEditText.setText(mString);
+            if (mContent != null) {
+                mAlertEditText.setText(mContent);
                 mAlertEditText.setSelection(mAlertEditText.length());
                 mAlertEditText.selectAll();
             }
             mAlertEditText.setSelectAllOnFocus(true);
 
-            mAlertEditText.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    return false;
-                }
-            });
+            mAlertEditText.setOnKeyListener((v, keyCode, event) -> false);
 
             mTxtOk.setOnClickListener(v -> {
                 startHandleCreateEvent();
@@ -166,7 +168,11 @@ public class NewEventDialog extends ViewObservable {
             });
 
             mTxtPick.setOnClickListener( view -> {
-                mOnItemClickListener.onItemClick();
+                mOnItemClickListener.onItemClick(PICK_IMAGE);
+            });
+
+            mTxtDate.setOnClickListener(v -> {
+                pickDateAndSetDate();
             });
 
             mTxtCancel.setOnClickListener(v -> {
@@ -214,13 +220,14 @@ public class NewEventDialog extends ViewObservable {
         }
 
         private void startHandleCreateEvent() {
-            mString = mAlertEditText.getText().toString().trim();
-            EventInfor eventInfor = new EventInfor(mString, "datexx", mUri);
+            mContent = mAlertEditText.getText().toString().trim();
+
+            EventInfor eventInfor = new EventInfor(mContent, mDate, mUri, "xxx");
             notifyObservers(Event.Builder.create().setType(Event.EVENT_RENAME_MEDIA).setData(eventInfor));
         }
 
         public void setCurrentName(String currentName) {
-            mString = currentName;
+            mContent = currentName;
         }
 
         @Override
@@ -236,6 +243,20 @@ public class NewEventDialog extends ViewObservable {
         @Override
         public void onCancel(DialogInterface dialog) {
             super.onCancel(dialog);
+        }
+
+        private void pickDateAndSetDate() {
+            DialogFragment newFragment = new DatePickerFragment() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    super.onDateSet(view, year, month, dayOfMonth);
+                    mDate = String.valueOf((new StringBuilder().append(dayOfMonth).append(".")
+                            .append(month + 1).append(".")
+                            .append(year).append(",")));
+                    mTxtDate.setText(mDate);
+                }
+            };
+            newFragment.show(getActivity().getFragmentManager(), "datePicker");
         }
     }
 
@@ -254,4 +275,6 @@ public class NewEventDialog extends ViewObservable {
             android.util.Log.e(TAG, e.toString());
         }
     }
+
+
 }

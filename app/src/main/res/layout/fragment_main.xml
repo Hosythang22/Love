@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <hs.thang.com.love.util.CustomTextView
+                    <hs.thang.com.love.util.TextViewC
                         android:id="@+id/txtTop"
                         style="@style/TextLargeCircle"
                         android:text="@string/start_days" />
@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <hs.thang.com.love.util.CustomTextView
+                    <hs.thang.com.love.util.TextViewC
                         android:id="@+id/txtMedium"
                         style="@style/TextLargeCircle"
                         android:text="@string/x_days"
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <hs.thang.com.love.util.CustomTextView
+                    <hs.thang.com.love.util.TextViewC
                         android:id="@+id/txtBottom"
                         style="@style/TextLargeCircle"
                         android:text="@string/each_days" />
@@ -93,7 +93,7 @@
                         style="@style/ImageAvata" />
                 </FrameLayout>
 
-                <hs.thang.com.love.util.CustomTextView
+                <hs.thang.com.love.util.TextViewC
                     android:id="@+id/nickname1"
                     style="@style/TextAvata"
                     android:text="Nick Name 1" />
@@ -118,7 +118,7 @@
                         android:layout_height="@dimen/heart_max_height" />
                 </FrameLayout>
 
-                <hs.thang.com.love.util.CustomTextView
+                <hs.thang.com.love.util.TextViewC
                     android:id="@+id/nickname3"
                     style="@style/TextAvata"/>
 
@@ -139,7 +139,7 @@
                         style="@style/ImageAvata" />
                 </FrameLayout>
 
-                <hs.thang.com.love.util.CustomTextView
+                <hs.thang.com.love.util.TextViewC
                     android:id="@+id/nickname2"
                     style="@style/TextAvata"
                     android:text="Nick Name 2" />

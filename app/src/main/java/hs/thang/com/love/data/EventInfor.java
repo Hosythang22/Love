@@ -1,33 +1,55 @@
 package hs.thang.com.love.data;
 
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 
 /**
  * Created by DELL on 10/8/2017.
  */
 
-public class EventInfor implements Parcelable, Serializable {
+public class EventInfor implements Parcelable, Serializable, CursorHandler {
 
-    private String mTextInformation;
+    private String mContent;
     private String mDate;
     private Uri mUri;
+    private String mHowlong;
 
-    public EventInfor(String mTextInformation, String mDate, Uri mUri) {
-        this.mTextInformation = mTextInformation;
-        this.mDate = mDate;
-        this.mUri = mUri;
+    public EventInfor() {
     }
 
-    public String getmTextInformation() {
-        return mTextInformation;
+    public EventInfor(Cursor cursor) {
+        mContent = cursor.getString(1);
+        mDate = cursor.getString(2);
+        mHowlong = cursor.getString(3);
+        mUri = Uri.parse(cursor.getString(4));
     }
 
-    public void setmTextInformation(String mTextInformation) {
-        this.mTextInformation = mTextInformation;
+    public EventInfor(String mTextInformation, String date, Uri uri, String howlong) {
+        mContent = mTextInformation;
+        mDate = date;
+        mUri = uri;
+        mHowlong = howlong;
+    }
+
+    public String getmHowlong() {
+        return mHowlong;
+    }
+
+    public void setmHowlong(String mHowlong) {
+        this.mHowlong = mHowlong;
+    }
+
+    public String getmContent() {
+        return mContent;
+    }
+
+    public void setmContent(String mContent) {
+        this.mContent = mContent;
     }
 
     public String getmDate() {
@@ -54,13 +76,13 @@ public class EventInfor implements Parcelable, Serializable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.mTextInformation);
+        dest.writeString(this.mContent);
         dest.writeString(this.mDate);
         dest.writeParcelable(this.mUri, flags);
     }
 
     protected EventInfor(Parcel in) {
-        this.mTextInformation = in.readString();
+        this.mContent = in.readString();
         this.mDate = in.readString();
         this.mUri = in.readParcelable(Uri.class.getClassLoader());
     }
@@ -76,4 +98,9 @@ public class EventInfor implements Parcelable, Serializable {
             return new EventInfor[size];
         }
     };
+
+    @Override
+    public Object handle(Cursor cu) throws SQLException {
+        return null;
+    }
 }

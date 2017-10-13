@@ -6,7 +6,7 @@
     <dimen name="avata_height">110dp</dimen>
     <dimen name="cirle_width">290dp</dimen>
     <dimen name="cirle_height">290dp</dimen>
-    <dimen name="tab_label">22sp</dimen>
+    <dimen name="tab_label">18sp</dimen>
     <dimen name="heart_width">49sp</dimen>
     <dimen name="heart_height">59sp</dimen>
     <dimen name="heart_min_width">39sp</dimen>
@@ -14,7 +14,7 @@
     <dimen name="heart_max_width">49sp</dimen>
     <dimen name="heart_max_height">59sp</dimen>
 
-    /* text view label */
+    <!-- text view label -->
     <dimen name="label_text_size">19sp</dimen>
 
     <dimen name="list_item_text_size">15dp</dimen>
@@ -29,5 +29,30 @@
     <dimen name="notification_button_width_min">46dp</dimen>
     <dimen name="notification_screen_time_out_button_mar_start">8dp</dimen>
     <dimen name="notification_volume_first_button_pading">6dp</dimen>
-    Search "notification_screen_time_out_button_mar_start" (1 hit in 1 file)
+
+    <dimen name="size_avatar_toolbar">40dp</dimen>
+    <dimen name="spacing_double">16dp</dimen>
+    <dimen name="elevation_header">4dp</dimen>
+
+    <dimen name="space_min">4dp</dimen>
+    <dimen name="space_small">8dp</dimen>
+    <dimen name="space_avg">16dp</dimen>
+    <dimen name="space_big">32dp</dimen>
+
+    <dimen name="padding_min">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_avg">16dp</dimen>
+    <dimen name="padding_big">32dp</dimen>
+
+    <dimen name="margin_min">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_avg">16dp</dimen>
+    <dimen name="margin_big">32dp</dimen>
+    <dimen name="margin_huge">64dp</dimen>
+
+    <dimen name="user_icon_width">36dp</dimen>
+    <dimen name="user_icon_height">36dp</dimen>
+
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
 </resources>

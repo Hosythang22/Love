@@ -11,7 +11,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.AdapterView;
@@ -30,7 +29,6 @@ import hs.thang.com.love.gallery.data.MediaSet;
 import hs.thang.com.love.gallery.provider.CPHelper;
 import hs.thang.com.love.util.Measure;
 import hs.thang.com.love.util.PermissionUtils;
-import hs.thang.com.love.view.tab.TimeFragment;
 import hs.thang.com.thu.R;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -62,7 +60,7 @@ public class GalleryActivity extends AbsActivity implements GridImageAdapter.OnI
         }
 
         int spanCount = columnsCount();
-        mSpacingDecoration = new GridSpacingItemDecoration(spanCount, Measure.pxToDp(3, this), true);
+        mSpacingDecoration = new GridSpacingItemDecoration(spanCount, Measure.pxToDp(0, this), true);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_grid_view);
         mRecyclerView.setHasFixedSize(true);
@@ -139,16 +137,6 @@ public class GalleryActivity extends AbsActivity implements GridImageAdapter.OnI
                             Log.d("fuck", "run");
                             ((GridImageAdapter) mAdapter).setMediaItems(mediaItems);
                         });
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
-        if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

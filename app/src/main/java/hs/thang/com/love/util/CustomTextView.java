@@ -29,7 +29,7 @@ public class CustomTextView extends TextView {
     private void applyCustomFont(Context context, AttributeSet attrs) {
         TypedArray attributeArray = context.obtainStyledAttributes(
                 attrs,
-                R.styleable.CustomTextView);
+                R.styleable.TextViewC);
 
         int textStyle = attrs.getAttributeIntValue(ANDROID_SCHEMA, "textStyle", TypefaceCustom.XOXOXA);
 

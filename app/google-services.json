@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "257175195854",
+    "firebase_url": "https://love-234ce.firebaseio.com",
+    "project_id": "love-234ce",
+    "storage_bucket": "love-234ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257175195854:android:d1fd5a0cc720e8a4",
+        "android_client_info": {
+          "package_name": "hs.thang.com.love"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257175195854-bdost1sctvkmb7m59fr71u6t65f0k7sm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa6uP0FftFMKKsaxvDBZi44WryPGxPIjA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
