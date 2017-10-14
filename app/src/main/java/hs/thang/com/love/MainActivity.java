@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -31,6 +32,7 @@ import hs.thang.com.love.chat.ui.fragments.ChatFragment;
 import hs.thang.com.love.chat.ui.view.ChatBottomSheetView;
 import hs.thang.com.love.chat.utils.Constants;
 import hs.thang.com.love.util.Color;
+import hs.thang.com.love.util.KeyboardUtil;
 import hs.thang.com.love.util.LoveUtil;
 import hs.thang.com.love.view.tab.CustomTablayout;
 import hs.thang.com.love.view.tab.MainFragment;
@@ -140,37 +142,14 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         });
         mTabLayout.getTabAt(1).select();
 
-        /*final ChatBottomSheetDialogFragment myBottomSheet = ChatBottomSheetDialogFragment.newInstance(
-                getIntent().getExtras().getString(Constants.ARG_RECEIVER),
-                getIntent().getExtras().getString(Constants.ARG_RECEIVER_UID),
-                getIntent().getExtras().getString(Constants.ARG_FIREBASE_TOKEN));
-        myBottomSheet.show(getSupportFragmentManager(), myBottomSheet.getTag());*/
-
-        // get the bottom sheet view
-        LinearLayout llBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
-
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
-
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        /*bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);*/
-
-        //bottomSheetBehavior.setPeekHeight(140);
-
-        bottomSheetBehavior.setHideable(false);
-
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-
-            }
-
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            final ChatBottomSheetDialogFragment myBottomSheet = ChatBottomSheetDialogFragment.newInstance(
+                    getIntent().getExtras().getString(Constants.ARG_RECEIVER),
+                    getIntent().getExtras().getString(Constants.ARG_RECEIVER_UID),
+                    getIntent().getExtras().getString(Constants.ARG_FIREBASE_TOKEN));
+            myBottomSheet.show(getSupportFragmentManager(), myBottomSheet.getTag());
         });
-
     }
 
     @Override

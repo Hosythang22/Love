@@ -25,6 +25,7 @@ allprojects {
         jcenter()
         maven { url "https://dl.bintray.com/hani-momanii/maven"}
         google()
+        maven { url "https://jitpack.io" }
     }
 }
 

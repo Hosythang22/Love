@@ -12,7 +12,6 @@
         app:layoutManager="LinearLayoutManager" />
 
     <EditText
-
         android:id="@+id/edit_text_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,5 +26,4 @@
         android:inputType="text"
         android:maxLines="1"
         android:padding="@dimen/padding_small" />
-
 </RelativeLayout>

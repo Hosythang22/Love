@@ -326,4 +326,6 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="overlay_color">#AA000000</color>
+
 </resources>

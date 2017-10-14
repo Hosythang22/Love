@@ -88,7 +88,7 @@ public class ChatBottomSheetView extends FrameLayout implements ChatContract.Vie
 
         mETxtMessage = (EditText) findViewById(R.id.edit_text_message);
         mETxtMessage.setOnEditorActionListener(this);
-
+        mETxtMessage.requestFocus();
 
 
         mChatPresenter = new ChatPresenter(this);

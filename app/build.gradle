@@ -72,6 +72,10 @@ dependencies {
 
     // event bus
     compile 'org.greenrobot:eventbus:3.0.0'
+
+    compile 'com.facebook.rebound:rebound:0.3.8'
+    compile 'com.github.flipkart-incubator:circular-image:1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
