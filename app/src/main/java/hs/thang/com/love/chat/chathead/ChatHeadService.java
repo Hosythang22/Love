@@ -76,7 +76,7 @@ public class ChatHeadService extends Service {
             @Override
             public void detachView(String key, ChatHead<? extends Serializable> chatHead, ViewGroup parent) {
                 View cachedView = viewCache.get(key);
-                if(cachedView!=null) {
+                if (cachedView != null) {
                     parent.removeView(cachedView);
                 }
             }
@@ -84,7 +84,7 @@ public class ChatHeadService extends Service {
             @Override
             public void removeView(String key, ChatHead<? extends Serializable> chatHead, ViewGroup parent) {
                 View cachedView = viewCache.get(key);
-                if(cachedView!=null) {
+                if (cachedView != null) {
                     viewCache.remove(key);
                     parent.removeView(cachedView);
                 }
@@ -97,12 +97,8 @@ public class ChatHeadService extends Service {
         });
 
         addChatHead();
-        addChatHead();
-        addChatHead();
-        addChatHead();
         chatHeadManager.setArrangement(MinimizedArrangement.class, null);
         moveToForeground();
-
     }
 
     private Drawable getChatHeadDrawable(String key) {
@@ -163,7 +159,7 @@ public class ChatHeadService extends Service {
     }
 
     public void minimize() {
-        chatHeadManager.setArrangement(MinimizedArrangement.class,null);
+        chatHeadManager.setArrangement(MinimizedArrangement.class, null);
     }
 
     /**
@@ -171,7 +167,7 @@ public class ChatHeadService extends Service {
      * runs in the same process as its clients, we don't need to deal with IPC.
      */
     public class LocalBinder extends Binder {
-        ChatHeadService getService() {
+        public ChatHeadService getService() {
             // Return this instance of LocalService so clients can call public methods
             return ChatHeadService.this;
         }

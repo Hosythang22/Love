@@ -207,7 +207,6 @@ public class MaximizedArrangement<T extends Serializable> extends ChatHeadArrang
                 activeVerticalSpring.setEndValue(point.y);
             }
         }
-
     }
 
     @Override
@@ -282,7 +281,7 @@ public class MaximizedArrangement<T extends Serializable> extends ChatHeadArrang
             double dy = activeChatHead.getVerticalSpring().getCurrentValue() - point.y;
             double distanceFromOriginal = Math.hypot(dx, dy);
             if (distanceFromOriginal < maxDistanceFromOriginal) {
-                showView(activeChatHead, dx, dy, distanceFromOriginal);
+                showView(activeChatHead, dx, dy, distanceFromOriginal); // show chat list + enter text layout
             } else {
                 hideView();
             }

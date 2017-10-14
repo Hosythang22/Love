@@ -1,20 +1,9 @@
 package hs.thang.com.love.chat.chathead.lib.ui;
 
-import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewManager;
-import android.view.WindowManager;
 
-import com.facebook.rebound.SimpleSpringListener;
-import com.facebook.rebound.Spring;
-
-import java.io.Serializable;
-
-/**
- * Created by kiran.kumar on 27/10/16.
- */
 public interface ChatHeadContainer {
 
     void onInitialized(ChatHeadManager manager);

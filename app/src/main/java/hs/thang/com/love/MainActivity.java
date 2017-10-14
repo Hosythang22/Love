@@ -2,37 +2,33 @@ package hs.thang.com.love;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.os.IBinder;
+import android.provider.Settings;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
-import android.util.Log;
-import android.view.View;
+import android.support.v7.app.AlertDialog;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import hs.thang.com.love.adapter.CustomPagerAdapter;
 import hs.thang.com.love.chat.ChatBottomSheetDialogFragment;
-import hs.thang.com.love.chat.ui.activities.ChatActivity;
-import hs.thang.com.love.chat.ui.fragments.ChatFragment;
-import hs.thang.com.love.chat.ui.view.ChatBottomSheetView;
+import hs.thang.com.love.chat.chathead.ChatHeadService;
+import hs.thang.com.love.chat.chathead.Utils;
 import hs.thang.com.love.chat.utils.Constants;
 import hs.thang.com.love.util.Color;
-import hs.thang.com.love.util.KeyboardUtil;
 import hs.thang.com.love.util.LoveUtil;
 import hs.thang.com.love.view.tab.CustomTablayout;
 import hs.thang.com.love.view.tab.MainFragment;
@@ -40,9 +36,14 @@ import hs.thang.com.thu.R;
 
 public class MainActivity extends AbsActivity implements MainFragment.UpdateBackgroundListener {
 
+    public static int OVERLAY_PERMISSION_REQ_CODE_CHATHEAD = 1234;
+
     private ViewPager mViewPager;
     private CustomTablayout mTabLayout;
     public LinearLayout mLinearLayout;
+
+    private ChatHeadService chatHeadService;
+    private boolean bound;
 
     // for test
     private TextView mTest;
@@ -59,6 +60,30 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         intent.putExtra(Constants.ARG_RECEIVER_UID, receiverUid);
         intent.putExtra(Constants.ARG_FIREBASE_TOKEN, firebaseToken);
         context.startActivity(intent);
+    }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            ChatHeadService.LocalBinder binder = (ChatHeadService.LocalBinder) service;
+            chatHeadService = binder.getService();
+            bound = true;
+            chatHeadService.minimize();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            bound = false;
+        }
+    };
+
+    private void startChatHead() {
+        Intent intent = new Intent(this, ChatHeadService.class);
+        startService(intent);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -150,6 +175,12 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
                     getIntent().getExtras().getString(Constants.ARG_FIREBASE_TOKEN));
             myBottomSheet.show(getSupportFragmentManager(), myBottomSheet.getTag());
         });
+
+        if(Utils.canDrawOverlays(this))
+            startChatHead();
+        else{
+            requestPermission(OVERLAY_PERMISSION_REQ_CODE_CHATHEAD);
+        }
     }
 
     @Override
@@ -173,5 +204,39 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         Bitmap bitmap = LoveUtil.decodeUriToBitmap(this, uri);
         Drawable drawable = new BitmapDrawable(getResources(), bitmap);
         mLinearLayout.setBackground(drawable);
+    }
+
+    private void requestPermission(int requestCode){
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == OVERLAY_PERMISSION_REQ_CODE_CHATHEAD) {
+            if (!Utils.canDrawOverlays(this)) {
+                needPermissionDialog(requestCode);
+            }else{
+                startChatHead();
+            }
+        }
+    }
+
+    private void needPermissionDialog(final int requestCode){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("You need to allow permission");
+        builder.setPositiveButton("OK",
+                (dialog, which) -> {
+                    // TODO Auto-generated method stub
+                    requestPermission(requestCode);
+                });
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            // TODO Auto-generated method stub
+
+        });
+        builder.setCancelable(false);
+        builder.show();
     }
 }

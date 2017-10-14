@@ -9,9 +9,6 @@ import android.provider.Settings;
  */
 
 public class Utils {
-    public static String LogTag = "henrytest";
-    public static String EXTRA_MSG = "extra_msg";
-
 
     public static boolean canDrawOverlays(Context context){
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {

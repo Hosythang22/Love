@@ -37,15 +37,6 @@ public class UpArrowLayout extends ViewGroup {
         init();
     }
 
-    public int getArrowDrawable() {
-        return arrowDrawable;
-    }
-
-    public void setArrowDrawable(int arrowDrawable) {
-        this.arrowDrawable = arrowDrawable;
-        init();
-    }
-
     private void init() {
         if (arrowView != null) {
             removeView(arrowView);
@@ -61,7 +52,6 @@ public class UpArrowLayout extends ViewGroup {
         return imageView;
     }
 
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -74,7 +64,6 @@ public class UpArrowLayout extends ViewGroup {
             size -= arrowViewMeasuredHeight + pointTo.y;
             heightMeasureSpec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.getMode(heightMeasureSpec));
         }
-
 
         final boolean measureMatchParentChildren =
                 MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.EXACTLY ||
@@ -176,7 +165,6 @@ public class UpArrowLayout extends ViewGroup {
             updatePointer();
         }
         invalidate();
-
     }
 
 

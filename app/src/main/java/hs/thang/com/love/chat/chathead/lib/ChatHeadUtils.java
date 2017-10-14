@@ -10,6 +10,7 @@ import android.view.WindowManager;
  */
 
 public class ChatHeadUtils {
+
     public static int dpToPx(DisplayMetrics metrics, int dp) {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics);
         if (px < 1.0f) {

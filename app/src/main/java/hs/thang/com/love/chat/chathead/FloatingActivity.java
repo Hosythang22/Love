@@ -23,7 +23,6 @@ import hs.thang.com.thu.R;
 public class FloatingActivity extends AbsActivity implements View.OnClickListener {
 
     public static int OVERLAY_PERMISSION_REQ_CODE_CHATHEAD = 1234;
-    public static int OVERLAY_PERMISSION_REQ_CODE_CHATHEAD_MSG = 5678;
 
     private Button addButton;
     private Button removeButton;
@@ -118,7 +117,6 @@ public class FloatingActivity extends AbsActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == OVERLAY_PERMISSION_REQ_CODE_CHATHEAD) {
             if (!Utils.canDrawOverlays(this)) {
                 needPermissionDialog(requestCode);
@@ -126,15 +124,7 @@ public class FloatingActivity extends AbsActivity implements View.OnClickListene
                 startChatHead();
             }
 
-        }/*else if(requestCode == OVERLAY_PERMISSION_REQ_CODE_CHATHEAD_MSG){
-            if (!Utils.canDrawOverlays(this)) {
-                needPermissionDialog(requestCode);
-            }else{
-                showChatHeadMsg();
-            }
-
-        }*/
-
+        }
     }
 
     private void needPermissionDialog(final int requestCode){

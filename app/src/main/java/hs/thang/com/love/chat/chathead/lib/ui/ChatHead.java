@@ -31,7 +31,6 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
 
     final int CLOSE_ATTRACTION_THRESHOLD = ChatHeadUtils.dpToPx(getContext(), 110);
     private final int touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
-    private final float DELTA = ChatHeadUtils.dpToPx(getContext(), 10);
     private ChatHeadManager manager;
     private SpringSystem springSystem;
     private boolean isSticky = false;
@@ -109,7 +108,7 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
             @Override
             public void onSpringUpdate(Spring spring) {
                 super.onSpringUpdate(spring);
-                manager.getChatHeadContainer().setViewX(ChatHead.this, (int)spring.getCurrentValue());
+                manager.getChatHeadContainer().setViewX(ChatHead.this, (int) spring.getCurrentValue());
             }
 
             @Override
@@ -125,7 +124,7 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
             @Override
             public void onSpringUpdate(Spring spring) {
                 super.onSpringUpdate(spring);
-                manager.getChatHeadContainer().setViewY(ChatHead.this, (int)spring.getCurrentValue());
+                manager.getChatHeadContainer().setViewY(ChatHead.this, (int) spring.getCurrentValue());
             }
 
             @Override
@@ -207,19 +206,11 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
 
     }
 
-    public SpringListener getHorizontalPositionListener() {
-        return xPositionListener;
-    }
-
-    public SpringListener getVerticalPositionListener() {
-        return yPositionListener;
-    }
-
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         super.onTouchEvent(event);
 
-        if(xPositionSpring==null || yPositionSpring==null) return false;
+        if (xPositionSpring == null || yPositionSpring == null) return false;
         //Chathead view will set the correct active springs on touch
         Spring activeHorizontalSpring = xPositionSpring;
         Spring activeVerticalSpring = yPositionSpring;
@@ -298,7 +289,7 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
                 int yVelocity = (int) velocityTracker.getYVelocity();
                 velocityTracker.recycle();
                 velocityTracker = null;
-                if(xPositionSpring!=null && yPositionSpring!=null) {
+                if (xPositionSpring != null && yPositionSpring != null) {
                     boolean touchUpHandled = manager.getActiveArrangement().handleTouchUp(this, xVelocity, yVelocity, activeHorizontalSpring, activeVerticalSpring, wasDragging);
                 }
             }

@@ -25,12 +25,10 @@ import hs.thang.com.love.chat.chathead.lib.ui.MinimizedArrangement;
 
 import static android.content.Context.WINDOW_SERVICE;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM;
 import static android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 import static android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
 import static android.view.WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
 import static android.view.WindowManager.LayoutParams.TYPE_PHONE;
-import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
 
 /**
  * Created by kiran.kumar on 08/11/16.
@@ -44,8 +42,6 @@ public class WindowManagerContainer extends FrameChatHeadContainer {
      */
     private View motionCaptureView;
 
-    private int cachedHeight;
-    private int cachedWidth;
     private WindowManager windowManager;
     private ChatHeadArrangement currentArrangement;
     private boolean motionCaptureViewAdded;
