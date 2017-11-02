@@ -62,8 +62,6 @@ public class DefaultChatHeadManager<T extends Serializable> implements ChatHeadC
     private boolean overlayVisible;
     private ImageView closeButtonShadow;
     private SpringSystem springSystem;
-    private FragmentManager fragmentManager;
-    private Fragment currentFragment;
     private ChatHeadConfig config;
     private ChatHeadListener listener;
     private Bundle activeArrangementBundle;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Love</string>
+    <string name="app_name">Thủy</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_fingerprint">Enter password or use your fingerprint to continue</string>
     <string name="desc_fingerprint">Please place your fingertip on the scanner to verify your identity</string>

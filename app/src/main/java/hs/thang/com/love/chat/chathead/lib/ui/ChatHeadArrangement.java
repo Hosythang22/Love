@@ -9,6 +9,7 @@ import com.facebook.rebound.Spring;
  * Created by kirankumar on 13/02/15.
  */
 public abstract class ChatHeadArrangement {
+
     public abstract void setContainer(ChatHeadManager container);
 
     public abstract void onActivate(ChatHeadManager container, Bundle extras, int maxWidth, int maxHeight, boolean animated);

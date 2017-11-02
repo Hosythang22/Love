@@ -57,7 +57,7 @@ public class ChatHeadService extends Service {
         windowManagerContainer = new WindowManagerContainer(this);
         chatHeadManager = new DefaultChatHeadManager<String>(this, windowManagerContainer);
         chatHeadManager.setViewAdapter(new ChatHeadViewAdapter<String>() {
-
+ 
             @Override
             public View attachView(String key, ChatHead chatHead, ViewGroup parent) {
                 View cachedView = viewCache.get(key);
@@ -110,7 +110,6 @@ public class ChatHeadService extends Service {
         circularDrawable.setNotificationDrawer(new CircularNotificationDrawer().setNotificationText(String.valueOf(badgeCount)).setNotificationAngle(135).setNotificationColor(Color.WHITE, Color.RED));
         circularDrawable.setBorder(Color.WHITE, 3);
         return circularDrawable;
-
     }
 
     private void moveToForeground() {

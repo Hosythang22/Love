@@ -49,7 +49,6 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
     private Spring xPositionSpring;
     private Spring yPositionSpring;
     private Bundle extras;
-    private ImageView imageView;
     private boolean isHero;
 
     public ChatHead(Context context) {
@@ -210,7 +209,9 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
     public boolean onTouchEvent(@NonNull MotionEvent event) {
         super.onTouchEvent(event);
 
-        if (xPositionSpring == null || yPositionSpring == null) return false;
+        if (xPositionSpring == null || yPositionSpring == null) {
+            return false;
+        }
         //Chathead view will set the correct active springs on touch
         Spring activeHorizontalSpring = xPositionSpring;
         Spring activeVerticalSpring = yPositionSpring;
@@ -317,11 +318,8 @@ public class ChatHead<T extends Serializable> extends ImageView implements Sprin
         super.setImageDrawable(chatHeadDrawable);
     }
 
-
     public enum State {
         FREE, CAPTURED
     }
-
-
 }
 

@@ -19,6 +19,7 @@ import java.util.List;
  */
 
 public interface ChatHeadManager<T extends Serializable> {
+
     ChatHeadListener getListener();
 
     void setListener(ChatHeadListener listener);

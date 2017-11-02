@@ -140,7 +140,6 @@ public class MaximizedArrangement<T extends Serializable> extends ChatHeadArrang
     @Override
     public boolean handleTouchUp(ChatHead activeChatHead, int xVelocity, int yVelocity, Spring activeHorizontalSpring, Spring activeVerticalSpring, boolean wasDragging) {
 
-
         if (xVelocity == 0 && yVelocity == 0) {
             // this is a hack. If both velocities are 0, onSprintUpdate is not called and the chat head remains whereever it is
             // so we give a a negligible velocity to artificially fire onSpringUpdate
