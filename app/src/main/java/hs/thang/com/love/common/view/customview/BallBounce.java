@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class BallBounce extends View {
 

@@ -6,7 +6,7 @@ import android.os.Handler;
 import com.google.firebase.auth.FirebaseAuth;
 
 import hs.thang.com.love.AbsActivity;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class SplashActivity extends AbsActivity {
     private static final int SPLASH_TIME_MS = 1000;

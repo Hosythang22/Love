@@ -19,7 +19,7 @@ import hs.thang.com.love.chatscreen.chat.core.registration.RegisterPresenter;
 import hs.thang.com.love.chatscreen.chat.core.users.add.AddUserContract;
 import hs.thang.com.love.chatscreen.chat.core.users.add.AddUserPresenter;
 import hs.thang.com.love.chatscreen.chat.ui.activities.UserListingActivity;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Author: Kartik Sharma

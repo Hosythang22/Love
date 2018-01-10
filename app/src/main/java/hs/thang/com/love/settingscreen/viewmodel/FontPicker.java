@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import hs.thang.com.love.gallery.adapter.DividerItemDecoration;
 import hs.thang.com.love.settingscreen.adapter.FontPickerAdapter;
 import hs.thang.com.love.settingscreen.view.FontPickerDialog;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 /**

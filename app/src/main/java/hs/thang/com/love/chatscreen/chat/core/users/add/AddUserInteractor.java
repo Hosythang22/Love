@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import hs.thang.com.love.chatscreen.chat.models.User;
 import hs.thang.com.love.chatscreen.chat.utils.Constants;
 import hs.thang.com.love.common.utils.SharedPrefUtil;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Author: Kartik Sharma

@@ -1,9 +1,7 @@
 package hs.thang.com.love.settingscreen.viewmodel;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,13 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import hs.thang.com.love.MainActivity;
 import hs.thang.com.love.chatscreen.chat.utils.Constants;
 import hs.thang.com.love.common.activity.AbsTabFragment;
 import hs.thang.com.love.common.utils.SharedPrefUtil;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 @SuppressLint("ValidFragment")
 public class SettingTabFragment extends AbsTabFragment implements SettingTabContract.View {

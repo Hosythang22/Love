@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class PasswordState extends FrameLayout {
 

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class KeyboardView extends FrameLayout implements View.OnClickListener {
 

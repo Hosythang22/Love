@@ -2,7 +2,6 @@ package hs.thang.com.love.settingscreen.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import hs.thang.com.love.settingscreen.view.FontPickerDialog;
 import hs.thang.com.love.settingscreen.viewmodel.FontPicker;
 import hs.thang.com.love.util.TextViewC;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 1/10/2018.

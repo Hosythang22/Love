@@ -10,7 +10,7 @@ import hs.thang.com.love.AbsActivity;
 import hs.thang.com.love.chatscreen.chat.FirebaseChatMainApp;
 import hs.thang.com.love.chatscreen.chat.ui.fragments.ChatFragment;
 import hs.thang.com.love.chatscreen.chat.utils.Constants;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class ChatActivity extends AbsActivity {
     private Toolbar mToolbar;

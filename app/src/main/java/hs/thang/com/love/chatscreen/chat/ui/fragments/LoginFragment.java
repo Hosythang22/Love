@@ -16,7 +16,7 @@ import hs.thang.com.love.chatscreen.chat.core.login.LoginContract;
 import hs.thang.com.love.chatscreen.chat.core.login.LoginPresenter;
 import hs.thang.com.love.chatscreen.chat.ui.activities.RegisterActivity;
 import hs.thang.com.love.chatscreen.chat.ui.activities.UserListingActivity;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Author: Kartik Sharma

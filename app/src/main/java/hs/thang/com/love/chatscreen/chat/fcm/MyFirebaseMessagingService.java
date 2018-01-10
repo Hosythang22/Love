@@ -18,7 +18,7 @@ import hs.thang.com.love.chatscreen.chat.FirebaseChatMainApp;
 import hs.thang.com.love.chatscreen.chat.events.PushNotificationEvent;
 import hs.thang.com.love.chatscreen.chat.ui.activities.ChatActivity;
 import hs.thang.com.love.chatscreen.chat.utils.Constants;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

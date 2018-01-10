@@ -18,10 +18,8 @@ import java.util.ArrayList;
 import hs.thang.com.love.common.Model;
 import hs.thang.com.love.common.viewmodel.BaseAdapter;
 import hs.thang.com.love.data.EventInformation;
-import hs.thang.com.love.gallery.data.MediaItem;
-import hs.thang.com.love.gallery.data.MediaObject;
 import hs.thang.com.love.util.TextViewC;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by DELL on 10/8/2017.

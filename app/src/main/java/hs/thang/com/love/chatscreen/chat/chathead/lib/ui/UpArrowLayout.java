@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by kirankumar on 17/02/15.

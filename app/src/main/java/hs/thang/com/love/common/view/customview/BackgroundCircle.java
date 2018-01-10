@@ -8,7 +8,7 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class BackgroundCircle extends View {
 

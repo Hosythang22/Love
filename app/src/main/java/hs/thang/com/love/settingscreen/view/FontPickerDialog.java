@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 1/10/2018.

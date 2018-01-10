@@ -34,7 +34,7 @@ import hs.thang.com.love.common.comunication.ViewObservable;
 import hs.thang.com.love.common.view.DatePickerFragment;
 import hs.thang.com.love.data.EventInformation;
 import hs.thang.com.love.util.TextViewC;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 import static java.util.prefs.Preferences.MAX_NAME_LENGTH;
 

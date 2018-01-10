@@ -15,7 +15,7 @@ import hs.thang.com.love.AbsActivity;
 import hs.thang.com.love.chatscreen.chat.core.logout.LogoutContract;
 import hs.thang.com.love.chatscreen.chat.core.logout.LogoutPresenter;
 import hs.thang.com.love.chatscreen.chat.ui.adapters.UserListingPagerAdapter;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class UserListingActivity extends AbsActivity implements LogoutContract.View {
     private Toolbar mToolbar;

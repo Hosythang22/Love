@@ -30,7 +30,7 @@ import hs.thang.com.love.chatscreen.chat.events.PushNotificationEvent;
 import hs.thang.com.love.chatscreen.chat.models.Chat;
 import hs.thang.com.love.chatscreen.chat.ui.adapters.ChatRecyclerAdapter;
 import hs.thang.com.love.chatscreen.chat.utils.Constants;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 10/13/2017.

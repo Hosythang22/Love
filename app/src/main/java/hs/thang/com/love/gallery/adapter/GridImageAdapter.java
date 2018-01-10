@@ -19,8 +19,7 @@ import java.util.ArrayList;
 import hs.thang.com.love.common.Model;
 import hs.thang.com.love.common.viewmodel.BaseAdapter;
 import hs.thang.com.love.gallery.data.MediaItem;
-import hs.thang.com.love.gallery.data.MediaObject;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class GridImageAdapter extends BaseAdapter {
 

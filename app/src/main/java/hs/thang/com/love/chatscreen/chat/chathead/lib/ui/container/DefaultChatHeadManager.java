@@ -40,7 +40,7 @@ import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.MaximizedArrangement;
 import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.MinimizedArrangement;
 import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.SpringConfigsHolder;
 import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.UpArrowLayout;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DefaultChatHeadManager<T extends Serializable> implements ChatHeadCloseButton.CloseButtonListener, ChatHeadManager<T> {

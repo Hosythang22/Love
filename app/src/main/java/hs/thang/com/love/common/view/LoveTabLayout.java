@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 3/22/2017.

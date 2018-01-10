@@ -1,6 +1,5 @@
 package hs.thang.com.love.common.view;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -9,7 +8,7 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 3/17/2017.

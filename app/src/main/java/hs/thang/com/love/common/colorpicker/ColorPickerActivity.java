@@ -1,15 +1,12 @@
 package hs.thang.com.love.common.colorpicker;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 import hs.thang.com.love.AbsActivity;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 import thang.hs.com.colorpicker.ColorPicker;
 
 /**

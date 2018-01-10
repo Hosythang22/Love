@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import hs.thang.com.love.gallery.data.MediaSet;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 import java.util.List;
 

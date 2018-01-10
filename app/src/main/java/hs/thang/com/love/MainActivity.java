@@ -1,7 +1,6 @@
 package hs.thang.com.love;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,10 +13,8 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,7 +28,6 @@ import hs.thang.com.love.common.viewmodel.LoveViewPager;
 import hs.thang.com.love.util.LoveUtil;
 import hs.thang.com.love.common.view.LoveTabLayout;
 import hs.thang.com.love.lovescreen.viewmodel.LoveTabFragment;
-import hs.thang.com.thu.R;
 
 public class MainActivity extends AbsActivity
         implements LoveTabFragment.UpdateBackgroundListener, LoveTabLayout.OnTabSelectedListener,

@@ -9,7 +9,7 @@ import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class CustomHeart extends View {
 

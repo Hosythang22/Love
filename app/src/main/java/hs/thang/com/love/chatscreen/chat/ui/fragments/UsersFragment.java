@@ -19,7 +19,7 @@ import hs.thang.com.love.chatscreen.chat.core.users.get.all.GetUsersPresenter;
 import hs.thang.com.love.chatscreen.chat.models.User;
 import hs.thang.com.love.chatscreen.chat.ui.adapters.UserListingRecyclerAdapter;
 import hs.thang.com.love.chatscreen.chat.utils.ItemClickSupport;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Author: Kartik Sharma

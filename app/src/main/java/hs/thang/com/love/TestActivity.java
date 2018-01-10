@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import hs.thang.com.love.common.view.CanvasView;
-import hs.thang.com.thu.R;
 
 public class TestActivity extends AbsActivity {
 

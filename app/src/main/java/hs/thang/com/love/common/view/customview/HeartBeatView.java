@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 1/8/2018.

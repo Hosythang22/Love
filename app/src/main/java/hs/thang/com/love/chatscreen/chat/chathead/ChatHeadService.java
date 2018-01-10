@@ -27,7 +27,7 @@ import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.MaximizedArrangement;
 import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.MinimizedArrangement;
 import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.container.DefaultChatHeadManager;
 import hs.thang.com.love.chatscreen.chat.chathead.lib.ui.container.WindowManagerContainer;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by DELL on 10/14/2017.

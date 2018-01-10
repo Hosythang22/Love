@@ -29,7 +29,7 @@ import hs.thang.com.love.gallery.data.MediaSet;
 import hs.thang.com.love.gallery.provider.CPHelper;
 import hs.thang.com.love.util.Measure;
 import hs.thang.com.love.util.PermissionUtils;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;

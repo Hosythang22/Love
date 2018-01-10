@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import hs.thang.com.love.common.Model;
 import hs.thang.com.love.data.EventInformation;
 import hs.thang.com.love.util.TextViewC;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 1/5/2018.

@@ -13,7 +13,7 @@ import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringSystem;
 import com.facebook.rebound.SpringUtil;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 @SuppressLint("AppCompatCustomView")
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)

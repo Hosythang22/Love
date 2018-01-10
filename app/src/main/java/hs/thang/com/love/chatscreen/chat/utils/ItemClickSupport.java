@@ -3,7 +3,7 @@ package hs.thang.com.love.chatscreen.chat.utils;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class ItemClickSupport {
 

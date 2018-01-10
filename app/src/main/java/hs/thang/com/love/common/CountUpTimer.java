@@ -3,7 +3,7 @@ package hs.thang.com.love.common;
 import android.content.Context;
 import android.os.CountDownTimer;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class CountUpTimer extends CountDownTimer {
 

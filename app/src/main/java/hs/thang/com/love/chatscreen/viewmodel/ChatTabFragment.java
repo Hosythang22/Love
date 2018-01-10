@@ -2,7 +2,6 @@ package hs.thang.com.love.chatscreen.viewmodel;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,18 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import hs.thang.com.love.MainActivity;
 import hs.thang.com.love.chatscreen.chat.ui.activities.LoginActivity;
-import hs.thang.com.love.chatscreen.chat.ui.activities.SplashActivity;
 import hs.thang.com.love.chatscreen.chat.ui.activities.UserListingActivity;
-import hs.thang.com.love.chatscreen.chat.ui.fragments.UsersFragment;
-import hs.thang.com.love.common.activity.AbsFragment;
 import hs.thang.com.love.common.activity.AbsTabFragment;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by sev_user on 1/5/2018.

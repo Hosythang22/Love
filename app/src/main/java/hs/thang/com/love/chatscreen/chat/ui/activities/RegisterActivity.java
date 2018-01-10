@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import hs.thang.com.love.AbsActivity;
 import hs.thang.com.love.chatscreen.chat.ui.fragments.RegisterFragment;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class RegisterActivity extends AbsActivity {
     private Toolbar mToolbar;

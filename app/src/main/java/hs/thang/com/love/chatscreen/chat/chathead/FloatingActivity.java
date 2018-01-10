@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import hs.thang.com.love.AbsActivity;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Created by DELL on 10/14/2017.

@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.TextView;
 
 import hs.thang.com.love.chatscreen.chat.utils.Constants;
 import hs.thang.com.love.common.utils.SharedPrefUtil;
 import hs.thang.com.love.common.view.FontCache;
-import hs.thang.com.love.settingscreen.adapter.FontPickerAdapter;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 @SuppressLint("AppCompatCustomView")
 public class TextViewC extends TextView {

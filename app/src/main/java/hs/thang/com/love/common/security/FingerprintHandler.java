@@ -13,7 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.widget.TextView;
 
 import hs.thang.com.love.MainActivity;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {

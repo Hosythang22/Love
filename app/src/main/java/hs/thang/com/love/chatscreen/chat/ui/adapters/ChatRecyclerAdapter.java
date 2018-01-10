@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;
 
 import hs.thang.com.love.chatscreen.chat.models.Chat;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Author: Kartik Sharma

@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 /**
  * Utility class for network related queries.

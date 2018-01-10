@@ -37,7 +37,7 @@ import hs.thang.com.love.AbsActivity;
 import hs.thang.com.love.MainActivity;
 import hs.thang.com.love.view.customview.KeyboardView;
 import hs.thang.com.love.view.customview.password.PasswordView;
-import hs.thang.com.thu.R;
+import hs.thang.com.love.R;
 
 public class FingerprintActivity extends AbsActivity implements KeyboardView.OnClickListenner {
 
