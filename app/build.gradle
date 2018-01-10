@@ -69,6 +69,7 @@ dependencies {
     implementation files('libs/rebound-0.3.8.jar')
     compile 'com.nineoldandroids:library:2.4.0'
     implementation project(':colorpicker')
+    implementation project(':cropper')
 }
 
 apply plugin: 'com.google.gms.google-services'

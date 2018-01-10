@@ -51,7 +51,7 @@ public class MainActivity extends AbsActivity
 
     // for test
     private TextView mTest;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "CropActivity";
 
     public static void startActivity(Context context,
                                      String receiver,

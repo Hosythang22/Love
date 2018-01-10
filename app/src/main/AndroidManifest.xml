@@ -24,6 +24,20 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:name=".common.crop.CropActivity"
+            android:label="@string/app_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".common.crop.CropResultActivity">
+        </activity>
+        <activity android:name="thang.hs.com.cropper.CropImageActivity">
+        </activity>
+
+        <activity
             android:name="hs.thang.com.love.MainActivity"
             android:windowSoftInputMode="adjustResize"
             android:fitsSystemWindows="true"
