@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_height="@dimen/listview_item_heigh">
+        android:id="@+id/change_wallpaper_bg"
+        style="@style/item_setting">
 
-        <TextView
+        <hs.thang.com.love.util.TextViewC
             style="@style/list_item_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -16,12 +16,16 @@
             android:text="@string/change_wallpaper"/>
 
     </RelativeLayout>
-    <RelativeLayout
+    <View
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_height="@dimen/listview_item_heigh">
+        android:layout_height="@dimen/diver_setting"
+        android:background="@color/diver_setting" />
+    <RelativeLayout
+        android:id="@+id/change_font"
+        style="@style/item_setting">
 
-        <TextView
+        <hs.thang.com.love.util.TextViewC
             style="@style/list_item_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -29,33 +33,37 @@
             android:text="@string/change_the_font"/>
 
     </RelativeLayout>
-    <RelativeLayout
+    <View
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_height="@dimen/listview_item_heigh">
+        android:layout_height="@dimen/diver_setting"
+        android:background="@color/diver_setting" />
+    <RelativeLayout
+        android:id="@+id/theme_color_bg"
+        style="@style/item_setting">
 
-        <TextView
+        <hs.thang.com.love.util.TextViewC
             style="@style/list_item_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:text="@string/theme_color"/>
 
-        <Switch
+        <Button
             android:id="@+id/theme_color"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:checked="false"
-            android:gravity="end|center_vertical"/>
+            style="@style/color_view"/>
 
     </RelativeLayout>
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/diver_setting"
+        android:background="@color/diver_setting" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
         android:layout_height="@dimen/listview_item_heigh">
 
-        <TextView
+        <hs.thang.com.love.util.TextViewC
             style="@style/list_item_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -63,5 +71,10 @@
             android:text="@string/text_color"/>
 
     </RelativeLayout>
+
+    <include
+        layout="@layout/text_color_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

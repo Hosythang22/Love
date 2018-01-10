@@ -16,11 +16,13 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import hs.thang.com.love.common.Model;
+import hs.thang.com.love.common.viewmodel.BaseAdapter;
 import hs.thang.com.love.gallery.data.MediaItem;
 import hs.thang.com.love.gallery.data.MediaObject;
 import hs.thang.com.thu.R;
 
-public class GridImageAdapter extends GalleryBaseAdapter {
+public class GridImageAdapter extends BaseAdapter {
 
     private static final String TAG = "GridImageAdapter";
 
@@ -64,7 +66,7 @@ public class GridImageAdapter extends GalleryBaseAdapter {
         }
 
         @Override
-        void bind(MediaObject mediaObject) {
+        public void bind(Model mediaObject) {
             MediaItem mediaItem = (MediaItem) mediaObject;
 
             RequestOptions options = new RequestOptions()

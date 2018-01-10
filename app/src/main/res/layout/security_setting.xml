@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
         android:layout_height="@dimen/listview_item_heigh">
 
-        <TextView
+        <hs.thang.com.love.util.TextViewC
             style="@style/list_item_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:text="@string/lock_screen"/>
+            android:text="@string/password"/>
 
         <Switch
             android:id="@+id/lock_screen"
@@ -25,12 +25,17 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/diver_setting"
+        android:background="@color/diver_setting" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
+
         android:layout_height="@dimen/listview_item_heigh">
 
-        <TextView
+        <hs.thang.com.love.util.TextViewC
             style="@style/list_item_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

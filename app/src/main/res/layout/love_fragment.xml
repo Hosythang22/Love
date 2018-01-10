@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/love_fragment"
+    android:paddingLeft="@dimen/horizontal_margin_middle"
+    android:paddingRight="@dimen/horizontal_margin_middle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relative_top"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/circle_size"
+        android:layout_height="@dimen/circle_size">
+
+        <hs.thang.com.love.common.view.customview.wave.WaveViewX
+            android:id="@+id/waveview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true">
+
+            <hs.thang.com.love.util.TextViewC
+                android:id="@+id/txtTop"
+                style="@style/TextLargeCircle"
+                android:text="@string/start_days" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1">
+
+            <hs.thang.com.love.util.TextViewC
+                android:id="@+id/txtMedium"
+                style="@style/TextLargeCircle"
+                android:text="@string/x_days"
+                android:textSize="40sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_alignParentBottom="true">
+
+            <hs.thang.com.love.util.TextViewC
+                android:id="@+id/txtBottom"
+                style="@style/TextLargeCircle"
+                android:text="@string/each_days" />
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/relative_top"
+        android:layout_marginTop="@dimen/padding_big"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/avata_width"
+                android:layout_height="@dimen/avata_height"
+                android:id="@+id/avata1"
+                style="@style/ImageAvata" />
+
+            <hs.thang.com.love.util.TextViewC
+                android:id="@+id/nickname1"
+                style="@style/TextAvata"
+                android:text="Nick Name 1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/middle"
+            android:layout_width="@dimen/avata_width"
+            android:layout_height="@dimen/avata_height"
+            android:gravity="center"
+            android:orientation="vertical">
+            <hs.thang.com.love.common.view.customview.HeartBeatView
+                android:id="@+id/forTest"
+                android:layout_width="@dimen/heart_max_height"
+                android:layout_height="@dimen/heart_max_height"
+                android:backgroundTint="@color/red"
+                app:duration="100"
+                android:layout_gravity="center" />
+        </LinearLayout>
+        <!--android:tint="@android:color/holo_blue_bright"-->
+
+        <LinearLayout
+            android:id="@+id/right"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/avata_width"
+                android:layout_height="@dimen/avata_height"
+                android:id="@+id/avata2"
+                style="@style/ImageAvata" />
+
+            <hs.thang.com.love.util.TextViewC
+                android:id="@+id/nickname2"
+                style="@style/TextAvata"
+                android:text="Nick Name 2" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

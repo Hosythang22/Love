@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- waveview -->
+    <declare-styleable name="WaveViewX">
+        <attr name="backgroudColor" format="color"></attr>
+        <attr name="progressColor" format="color"></attr>
+        <attr name="max" format="integer"></attr>
+        <attr name="progress" format="integer"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="HeartBeatView">
+        <attr name="scaleFactor" format="float" />
+        <attr name="duration" format="integer" />
+    </declare-styleable>
+
     <declare-styleable name="TextViewC">
         <attr name="font" format="string"/>
     </declare-styleable>

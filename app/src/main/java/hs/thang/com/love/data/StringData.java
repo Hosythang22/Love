@@ -17,7 +17,6 @@ public class StringData {
 
     public static boolean setPreference(Context c, String key, String value) {
         SharedPreferences settings = c.getSharedPreferences(PREFS_NAME, 0);
-        settings = c.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(key, value);
         return editor.commit();
@@ -25,7 +24,6 @@ public class StringData {
 
     static public String getPreference(Context c, String key) {
         SharedPreferences settings = c.getSharedPreferences(PREFS_NAME, 0);
-        settings = c.getSharedPreferences(PREFS_NAME, 0);
         String value = settings.getString(key, "");
         return value;
     }

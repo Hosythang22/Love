@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import hs.thang.com.love.gallery.adapter.AlbumSpinnerAdapter;
 
 import hs.thang.com.love.AbsActivity;
-import hs.thang.com.love.gallery.adapter.GalleryBaseAdapter;
+import hs.thang.com.love.common.viewmodel.BaseAdapter;
 import hs.thang.com.love.gallery.adapter.GridImageAdapter;
 import hs.thang.com.love.gallery.adapter.GridSpacingItemDecoration;
 import hs.thang.com.love.gallery.data.MediaItem;
@@ -41,7 +41,7 @@ public class GalleryActivity extends AbsActivity implements GridImageAdapter.OnI
     private static final String TAG = "GalleryActivity";
 
     private RecyclerView mRecyclerView;
-    private GalleryBaseAdapter mAdapter;
+    private BaseAdapter mAdapter;
     //private ProgressBar progressBar;
     private GridSpacingItemDecoration mSpacingDecoration;
 
@@ -100,9 +100,10 @@ public class GalleryActivity extends AbsActivity implements GridImageAdapter.OnI
         CPHelper.getMediasets(this)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mediaSet -> {
-                    mediaSets.add(mediaSet);
-                }, throwable -> {
+                .subscribe(onNext -> {
+                    mediaSets.add(onNext); // onNext = mediaSet
+                }, onError -> {
+                    Log.e(TAG, "initSpinner: ", onError); // onError = Throwable
                 }, () -> {
                     spinner.setAdapter(new AlbumSpinnerAdapter(this, mediaSets));
                 });

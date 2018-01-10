@@ -1,47 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/transparent_40"
-    android:id="@+id/backgound_frag_time"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:background="@drawable/rectangle_border"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <hs.thang.com.love.util.TextViewC
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Love Story" />
+
+        <hs.thang.com.love.util.TextViewC
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ripple"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="+" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/title"
+        android:orientation="vertical"
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="1dp"/>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/divider"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:clipToPadding="false"
         android:scrollbarThumbVertical="@drawable/ic_scrollbar"
         android:scrollbars="vertical" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Chat"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:minLines="2"
-        android:id="@+id/textView3"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="new Evvent"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"
-        android:background="@drawable/ripple"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:minLines="2"
-        android:id="@+id/textView4"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 </RelativeLayout>

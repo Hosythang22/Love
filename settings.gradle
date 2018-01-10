@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':rebound-0.3.8', ':colorpicker'

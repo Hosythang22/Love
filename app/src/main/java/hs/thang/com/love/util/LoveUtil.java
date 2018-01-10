@@ -30,21 +30,18 @@ public class LoveUtil {
     public static final String JPG = ".jpg";
 
 
-    public static final int CASE_AVATA1 = 1;
-    public static final int CASE_AVATA2 = 2;
+    public static final int CASE_AVATA_1 = 1;
+    public static final int CASE_AVATA_2 = 2;
     public static final int CASE_BACKGROUD = 3;
 
     private static int DEVICE_SCREEN_HEIGHT_SIZE = 800; // default 800
     private static int DEVICE_SCREEN_WIDTH_SIZE = 480; // default 480
 
-
-    //--------------------- Pick Image from Gallery for AVATA STRAT---------------------
-
     public static String generateTempPhotoFileName(int avata) {
         switch (avata) {
-            case CASE_AVATA1:
+            case CASE_AVATA_1:
                 return AVATA1_FILE + JPG;
-            case CASE_AVATA2:
+            case CASE_AVATA_2:
                 return AVATA2_FILE + JPG;
             case CASE_BACKGROUD:
                 return BACKGROUND_FILE + JPG;
@@ -154,5 +151,23 @@ public class LoveUtil {
             e.printStackTrace();
         }
         return getBitmap;
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    public static int getDimensionDp(int resID, Context context) {
+        return (int) (context.getResources().getDimension(resID) / context.getResources().getDisplayMetrics().density);
+    }
+
+    public static int dip2px(float dpValue, Context context) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

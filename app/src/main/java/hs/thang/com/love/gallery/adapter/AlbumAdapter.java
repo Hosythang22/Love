@@ -10,12 +10,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import hs.thang.com.love.gallery.data.MediaItem;
+import hs.thang.com.love.common.Model;
+import hs.thang.com.love.common.viewmodel.BaseAdapter;
 import hs.thang.com.love.gallery.data.MediaObject;
 import hs.thang.com.love.gallery.data.MediaSet;
 import hs.thang.com.thu.R;
 
-public class AlbumAdapter extends GalleryBaseAdapter {
+public class AlbumAdapter extends BaseAdapter {
 
     private static final String TAG = "AlbumAdapter";
 
@@ -58,7 +59,7 @@ public class AlbumAdapter extends GalleryBaseAdapter {
         }
 
         @Override
-        void bind(MediaObject mediaObject) {
+        public void bind(Model mediaObject) {
 
         }
     }

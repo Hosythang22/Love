@@ -1,81 +1,61 @@
 package hs.thang.com.love;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.ComponentName;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.flipkart.circularImageView.CircularDrawable;
-import com.flipkart.circularImageView.TextDrawer;
-import com.flipkart.circularImageView.notification.CircularNotificationDrawer;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
-import hs.thang.com.love.adapter.CustomPagerAdapter;
-import hs.thang.com.love.chat.ChatBottomSheetDialogFragment;
-import hs.thang.com.love.chat.chathead.ChatHeadService;
-import hs.thang.com.love.chat.chathead.FloatingActivity;
-import hs.thang.com.love.chat.chathead.Utils;
-import hs.thang.com.love.chat.chathead.lib.ui.ChatHead;
-import hs.thang.com.love.chat.chathead.lib.ui.ChatHeadViewAdapter;
-import hs.thang.com.love.chat.chathead.lib.ui.MinimizedArrangement;
-import hs.thang.com.love.chat.chathead.lib.ui.container.DefaultChatHeadManager;
-import hs.thang.com.love.chat.chathead.lib.ui.container.WindowManagerContainer;
-import hs.thang.com.love.chat.utils.Constants;
-import hs.thang.com.love.util.Color;
+import hs.thang.com.love.common.activity.TabPackageListener;
+import hs.thang.com.love.common.viewmodel.LovePackagePagerAdapter;
+import hs.thang.com.love.chatscreen.chat.utils.Constants;
+import hs.thang.com.love.common.viewmodel.LoveViewPager;
 import hs.thang.com.love.util.LoveUtil;
-import hs.thang.com.love.view.tab.CustomTablayout;
-import hs.thang.com.love.view.tab.MainFragment;
+import hs.thang.com.love.common.view.LoveTabLayout;
+import hs.thang.com.love.lovescreen.viewmodel.LoveTabFragment;
 import hs.thang.com.thu.R;
 
-public class MainActivity extends AbsActivity implements MainFragment.UpdateBackgroundListener {
+public class MainActivity extends AbsActivity
+        implements LoveTabFragment.UpdateBackgroundListener, LoveTabLayout.OnTabSelectedListener,
+        ViewPager.OnPageChangeListener {
 
-    public static int OVERLAY_PERMISSION_REQ_CODE_CHATHEAD = 1234;
-
-    private ViewPager mViewPager;
-    private CustomTablayout mTabLayout;
+    private LoveTabLayout.TabLayoutOnPageChangeListener mTabLayoutOnPageChangeListener;
+    private LoveViewPager mViewPager;
+    private LoveTabLayout mTabLayout;
     public LinearLayout mLinearLayout;
+    private CoordinatorLayout mMainContent;
 
-    private ChatHeadService chatHeadService;
+    public static int sSelectedTab = 1;
+    public static ArrayList<Integer> sTabIndex;
+    public static final int CHAT_TAB_INDEX = 0;
+    public static final int LOVE_TAB_INDEX = 1;
+    public static final int SETTING_TAB_INDEX = 2;
 
-    //private final IBinder mBinder = new ChatHeadService.LocalBinder();
-    private DefaultChatHeadManager<String> chatHeadManager;
-    private int chatHeadIdentifier = 0;
-    private WindowManagerContainer windowManagerContainer;
-    private Map<String, View> viewCache = new HashMap<>();
+    private TabPackageListener mChatTabListener;
+    private TabPackageListener mLoveTabListener;
+    private TabPackageListener mSettingTabListener;
 
     // for test
     private TextView mTest;
     private static final String TAG = "MainActivity";
-
-    int[] pagerColors = {R.color.transparent_40, R.color.transparent_20, R.color.transparent_40};
 
     public static void startActivity(Context context,
                                      String receiver,
@@ -88,77 +68,70 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         context.startActivity(intent);
     }
 
-    /*private ServiceConnection mConnection = new ServiceConnection() {
-
-        @Override
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            // We've bound to LocalService, cast the IBinder and get LocalService instance
-            ChatHeadService.LocalBinder binder = (ChatHeadService.LocalBinder) service;
-            chatHeadService = binder.getService();
-            chatHeadService.minimize();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName arg0) {
-        }
-    };*/
-
-    /*private void startChatHead() {
-        Intent intent = new Intent(this, ChatHeadService.class);
-        startService(intent);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-    }*/
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mLinearLayout = (LinearLayout) findViewById(R.id.backgound);
+        mLinearLayout = (LinearLayout) findViewById(R.id.transparent_background);
+        mMainContent = (CoordinatorLayout) findViewById(R.id.main_content);
+        createTabs();
+    }
 
-        mTabLayout = (CustomTablayout) findViewById(R.id.tab_layout);
+    public void setChatTabListener(TabPackageListener eventListener) {
+        mChatTabListener = eventListener;
+    }
+
+    private void createTabs() {
+        mTabLayout = (LoveTabLayout) findViewById(R.id.tab_layout);
+        mViewPager = (LoveViewPager) findViewById(R.id.viewpager);
+        LovePackagePagerAdapter pagerAdapter = new LovePackagePagerAdapter(this, getSupportFragmentManager(), mTabLayout.getTabCount());
+        mViewPager.setAdapter(pagerAdapter);
+        mTabLayoutOnPageChangeListener = new LoveTabLayout.TabLayoutOnPageChangeListener(mTabLayout);
+        mViewPager.addOnPageChangeListener(mTabLayoutOnPageChangeListener);
+        mViewPager.addOnPageChangeListener(this);
+
+        //mTabLayout.setAdapter(pagerAdapter);
+        mTabLayout.setOnTabSelectedListener(this);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        mTabLayout.getTabAt(sSelectedTab).select();
 
-        getWindow().setStatusBarColor(ContextCompat.getColor(getBaseContext(), R.color.transparent_20));
+        sTabIndex = new ArrayList<>(Arrays.asList(CHAT_TAB_INDEX, LOVE_TAB_INDEX,
+                SETTING_TAB_INDEX));
+    }
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        CustomPagerAdapter adapter = new CustomPagerAdapter(this, getSupportFragmentManager(), mTabLayout.getTabCount());
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mViewPager.setAdapter(adapter);
-        mTabLayout.setBackgroundColor(Color.TRANSPARENT_40);
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
-                switch (tab.getPosition()) {
-                    case 0:
-                        mTabLayout.setBackgroundColor(Color.TRANSPARENT_40);
-                        break;
-                    case 1:
-                        mTabLayout.setBackgroundColor(Color.TRANSPARENT_20);
-                        break;
-                    case 2:
-                        mTabLayout.setBackgroundColor(Color.TRANSPARENT_40);
-                        break;
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        mViewPager.setCurrentItem(tab.getPosition());
+        switch (tab.getPosition()) {
+            case CHAT_TAB_INDEX:
+                mLinearLayout.setBackgroundColor(getResources().getColor(R.color.transparent_45));
+                if (mChatTabListener != null) {
+                    mChatTabListener.onTabSelected();
                 }
-            }
+                break;
+            case LOVE_TAB_INDEX:
+                mLinearLayout.setBackgroundColor(getResources().getColor(R.color.transparent_10));
+                break;
+            case SETTING_TAB_INDEX:
+                mLinearLayout.setBackgroundColor(getResources().getColor(R.color.transparent_45));
+                break;
+        }
+    }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
 
-            }
+    }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
+    }
 
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                //if android version is lollipop or greater, change the color of status bar as well
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        //if android version is lollipop or greater, change the color of status bar as well
                 /*if (Build.VERSION.SDK_INT >= 21) {
                     // set the color change animation only when page change is from 0 to 1 and from 1 to 2
                     if (position < 2) {
@@ -170,120 +143,25 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
 
                 }*/
 
-                // set the color change animation only when page change is from 0 to 1 and from 1 to 2
+        // set the color change animation only when page change is from 0 to 1 and from 1 to 2
                 /*if (position < 2) {
                     mLinearLayout.setBackgroundColor((Integer) new ArgbEvaluator().evaluate(positionOffset, ContextCompat.getColor(getBaseContext(), pagerColors[position]),
                             ContextCompat.getColor(getBaseContext(), pagerColors[position + 1])));
                 } else {
                     mLinearLayout.setBackgroundColor(ContextCompat.getColor(getBaseContext(), pagerColors[position]));
                 }*/
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-        mTabLayout.getTabAt(1).select();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            final ChatBottomSheetDialogFragment myBottomSheet = ChatBottomSheetDialogFragment.newInstance(
-                    getIntent().getExtras().getString(Constants.ARG_RECEIVER),
-                    getIntent().getExtras().getString(Constants.ARG_RECEIVER_UID),
-                    getIntent().getExtras().getString(Constants.ARG_FIREBASE_TOKEN));
-            myBottomSheet.show(getSupportFragmentManager(), myBottomSheet.getTag());
-        });
-
-        /*if(Utils.canDrawOverlays(this))
-            startChatHead();
-        else{
-            requestPermission(OVERLAY_PERMISSION_REQ_CODE_CHATHEAD);
-        }*/
-        windowManagerContainer = new WindowManagerContainer(this);
-        chatHeadManager = new DefaultChatHeadManager<String>(this, windowManagerContainer);
-        chatHeadManager.setViewAdapter(new ChatHeadViewAdapter<String>() {
-
-            @Override
-            public View attachView(String key, ChatHead chatHead, ViewGroup parent) {
-                View cachedView = viewCache.get(key);
-                if (cachedView == null) {
-                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                    View view = inflater.inflate(R.layout.fragment_test, parent, false);
-                    TextView identifier = (TextView) view.findViewById(R.id.identifier);
-                    identifier.setText(key);
-                    cachedView = view;
-                    viewCache.put(key, view);
-                }
-                parent.addView(cachedView);
-                return cachedView;
-            }
-
-            @Override
-            public void detachView(String key, ChatHead<? extends Serializable> chatHead, ViewGroup parent) {
-                View cachedView = viewCache.get(key);
-                if (cachedView != null) {
-                    parent.removeView(cachedView);
-                }
-            }
-
-            @Override
-            public void removeView(String key, ChatHead<? extends Serializable> chatHead, ViewGroup parent) {
-                View cachedView = viewCache.get(key);
-                if (cachedView != null) {
-                    viewCache.remove(key);
-                    parent.removeView(cachedView);
-                }
-            }
-
-            @Override
-            public Drawable getChatHeadDrawable(String key) {
-                //return this.getChatHeadDrawable(key);
-                return null;
-            }
-        });
-
-        addChatHead();
-        chatHeadManager.setArrangement(MinimizedArrangement.class, null);
-        //moveToForeground();
     }
 
-    public void minimize() {
-        chatHeadManager.setArrangement(MinimizedArrangement.class, null);
+    @Override
+    public void onPageSelected(int position) {
+
     }
 
-    private void moveToForeground() {
-        Notification notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.notification_template_icon_bg)
-                .setContentTitle("Springy heads")
-                .setContentText("Click to configure.")
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, FloatingActivity.class), 0))
-                .build();
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
-        //startForeground(1, notification);
     }
 
-    private Drawable getChatHeadDrawable(String key) {
-        Random rnd = new Random();
-        int randomColor = android.graphics.Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        CircularDrawable circularDrawable = new CircularDrawable();
-        circularDrawable.setBitmapOrTextOrIcon(new TextDrawer().setText("C" + key).setBackgroundColor(randomColor));
-        int badgeCount = (int) (Math.random() * 10f);
-        circularDrawable.setNotificationDrawer(new CircularNotificationDrawer().setNotificationText(String.valueOf(badgeCount)).setNotificationAngle(135).setNotificationColor(android.graphics.Color.WHITE, android.graphics.Color.RED));
-        circularDrawable.setBorder(android.graphics.Color.WHITE, 3);
-        return circularDrawable;
-    }
-
-    public void addChatHead() {
-        chatHeadIdentifier++;
-        chatHeadManager.addChatHead(String.valueOf(chatHeadIdentifier), false, true);
-        chatHeadManager.bringToFront(chatHeadManager.findChatHeadByKey(String.valueOf(chatHeadIdentifier)));
-    }
 
     @Override
     protected void onResume() {
@@ -298,9 +176,26 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*if (mConnection != null) {
-            unbindService(mConnection);
-        }*/
+
+        if (mChatTabListener != null) {
+            mChatTabListener = null;
+        }
+
+        if (mTabLayout != null) {
+            mTabLayout.removeAllTabs();
+            mTabLayout.setOnTabSelectedListener(this);
+            mTabLayout = null;
+        }
+
+        if (mViewPager != null) {
+            mViewPager.removeOnPageChangeListener(this);
+            //mViewPager.setAdapter(null);
+            if (mTabLayoutOnPageChangeListener != null) {
+                mViewPager.removeOnPageChangeListener(mTabLayoutOnPageChangeListener);
+                mTabLayoutOnPageChangeListener = null;
+            }
+            mViewPager = null;
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -308,10 +203,10 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
     public void updateBackground(Uri uri) {
         Bitmap bitmap = LoveUtil.decodeUriToBitmap(this, uri);
         Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-        mLinearLayout.setBackground(drawable);
+        mMainContent.setBackground(drawable);
     }
 
-    private void requestPermission(int requestCode){
+    private void requestPermission(int requestCode) {
         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
         intent.setData(Uri.parse("package:" + getPackageName()));
         startActivityForResult(intent, requestCode);
@@ -329,7 +224,7 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         }
     }*/
 
-    private void needPermissionDialog(final int requestCode){
+    private void needPermissionDialog(final int requestCode) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("You need to allow permission");
         builder.setPositiveButton("OK",
@@ -345,5 +240,20 @@ public class MainActivity extends AbsActivity implements MainFragment.UpdateBack
         builder.show();
     }
 
+    public void reload() {
+        if (Build.VERSION.SDK_INT >= 11) {
+            Intent intent = new Intent();
+            intent.setClass(this, this.getClass());
+            this.startActivity(intent);
+            this.finish();
+        } else {
+            Intent intent = getIntent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            finish();
+            overridePendingTransition(0, 0);
 
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        }
+    }
 }

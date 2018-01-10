@@ -1,46 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="hs.thang.com.love.gallery.GalleryActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/backgound"
+        android:id="@+id/transparent_background"
+        android:paddingTop="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:orientation="vertical">
 
-        <hs.thang.com.love.view.tab.CustomTablayout
+        <hs.thang.com.love.common.view.LoveTabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/transparent_20"
+            android:layout_height="wrap_content"
             app:tabIndicatorColor="@android:color/transparent"
             app:tabMode="fixed"/>
 
-        <android.support.v4.view.ViewPager
+        <hs.thang.com.love.common.viewmodel.LoveViewPager
+
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
-
-    <!-- include bottom sheet -->
-    <!--<include layout="@layout/bottom_sheet" />-->
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_dialog_email" />
 
 </android.support.design.widget.CoordinatorLayout>
 

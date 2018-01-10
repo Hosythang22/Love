@@ -18,7 +18,7 @@
         android:text="bottom_sheet_peek"
         android:textColor="@android:color/white" />
 
-    <hs.thang.com.love.chat.ui.view.ChatBottomSheetView
+    <hs.thang.com.love.chatscreen.chat.ui.view.ChatBottomSheetView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

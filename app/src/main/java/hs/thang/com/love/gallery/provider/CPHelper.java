@@ -22,6 +22,7 @@ public class CPHelper {
                 .projection(MediaSet.getProjection())
                 .selection(where)
                 .sort(BUCKET_ORDER_BY);
+        //MediaSet mediaSet = new MediaSet();
         return QueryUtils.query(builder.build(), context.getContentResolver(), MediaSet::new);
     }
 
